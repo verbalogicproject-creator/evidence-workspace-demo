@@ -1,0 +1,17 @@
+{
+  "schema": "atlas-customer/1.0",
+  "id": "fictional-support-desk",
+  "title": "Evidence Workspace · Fictional support desk",
+  "sources": ["support/procedures.en.md", "support/procedures.he.md", "support/exceptions.en.md", "support/exceptions.he.md"],
+  "source_roles": {
+    "support/procedures.en.md": "procedure",
+    "support/procedures.he.md": "procedure",
+    "support/exceptions.en.md": "procedure",
+    "support/exceptions.he.md": "procedure"
+  },
+  "vocabulary": [
+    {"id": "access", "definition": "Fictional account access request", "aliases": ["access", "permission", "approval", "גישה", "הרשאות", "אישור"]},
+    {"id": "backup", "definition": "Fictional backup and restore task", "aliases": ["backup", "restore", "recovery", "גיבוי", "שחזור"]},
+    {"id": "incident", "definition": "Fictional support incident", "aliases": ["incident", "outage", "escalation", "תקלה", "אירוע", "הסלמה"]}
+  ]
+}

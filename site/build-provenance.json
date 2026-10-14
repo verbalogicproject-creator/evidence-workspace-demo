@@ -1,0 +1,29 @@
+{
+  "demo_source_files": {
+    "content/product/about.en.md": "f3c0e39fdec7d459ce5d60c1181d66e7697ac2ed4af3e7d8ea28ad0088f2e798",
+    "content/product/about.he.md": "7c296122a58f1928e9f9a53fb49a47a9a24f3ebbf39b35509491866321ed2e04",
+    "content/product/limits.en.md": "aafb1ca61c08c7d2a5e1c9d6bb52a893c7eeeb0cd8e102bf229505eba07145ad",
+    "content/product/limits.he.md": "6e0c346a0f8271f7b7eaee0fbfb2787855f3ce7a6a7015ebed5cfaabd3d2df9c",
+    "content/product/pilot.en.md": "25c50b9def07d8bb8d4fab0dfb06f32db437aefbf62c2f3e9acc53d9897c24e7",
+    "content/product/pilot.he.md": "902160ea3510dc5eee9ff67e53c8798f948279d817cc91d1f9771c8a1f5444db",
+    "content/support/exceptions.en.md": "f45ab74270a6b105975fc1c1eefc89997d530e04b33473684cfe714496432a46",
+    "content/support/exceptions.he.md": "a86a3421fe90c7c970ea519cc8f053c3629b8790e0f9344bcb1c0608dcb1a989",
+    "content/support/procedures.en.md": "7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67",
+    "content/support/procedures.he.md": "e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07"
+  },
+  "product_files": {
+    "packages/atlas-workspace/frontend/app.ts": "cebbcb1760dcfa43739a911176d6cf6862f058c702b74113429d397c102a08e6",
+    "packages/atlas-workspace/frontend/dist/app.js": "61cd6645d5d12b9902daba1bf2ed922e99eb84e76c458bd741979afea9cb0992",
+    "packages/atlas-workspace/frontend/shell.html": "895fc65c1de8538d337448d00ca9fbd50a158ce11c354f123c757a4283e380ba",
+    "packages/atlas-workspace/frontend/style.css": "5be956dbf67464793d140e54082838a2173b624eda1f892f1570bce99bf7087a",
+    "packages/atlas-workspace/package-lock.json": "b94e4f7452edb3d65e329e94cab17bb907d1ca07f5f69af3cdb3e15541e7d598",
+    "packages/atlas-workspace/src/atlas_workspace/core.py": "9955c1bec98fd8a62375327b7592fb9dfbbd0794e6e9eea43321d8519c7d3aa2",
+    "packages/atlas-workspace/src/atlas_workspace/storage.py": "6fd3c35336c4984c7079b091223963303736640a39dcaba3fd9268b95cda743f"
+  },
+  "product_revision": null,
+  "schema": "evidence-workspace-demo-build/1.0",
+  "snapshots": {
+    "about": "ad4d204c234b1a095fee82eea821728d71aa69483462f8f03b0bd4b72bac2067",
+    "support": "9c4b6007b09a0db4476c4a985d3479e330bc8af954e4d4aafadb631451f5a388"
+  }
+}

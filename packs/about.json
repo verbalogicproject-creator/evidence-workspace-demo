@@ -1,0 +1,20 @@
+{
+  "schema": "atlas-customer/1.0",
+  "id": "evidence-workspace-about",
+  "title": "Evidence Workspace · About the product",
+  "sources": ["product/about.en.md", "product/about.he.md", "product/limits.en.md", "product/limits.he.md", "product/pilot.en.md", "product/pilot.he.md"],
+  "source_roles": {
+    "product/about.en.md": "guide",
+    "product/about.he.md": "guide",
+    "product/limits.en.md": "reference",
+    "product/limits.he.md": "reference",
+    "product/pilot.en.md": "guide",
+    "product/pilot.he.md": "guide"
+  },
+  "vocabulary": [
+    {"id": "citation", "definition": "A pointer to an exact selected source passage", "aliases": ["citation", "source", "evidence", "ציטוט", "מקור", "ראיה"]},
+    {"id": "snapshot", "definition": "A saved source version", "aliases": ["snapshot", "version", "freshness", "תמונת מצב", "גרסה", "עדכניות"]},
+    {"id": "access", "definition": "Who can inspect selected records", "aliases": ["access", "permission", "authorization", "גישה", "הרשאה", "הרשאות"]},
+    {"id": "pilot", "definition": "A bounded first customer test", "aliases": ["pilot", "trial", "evaluation", "פיילוט", "ניסוי", "בדיקה"]}
+  ]
+}

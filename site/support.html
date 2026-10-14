@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Evidence Workspace</title>
+<style>:root{--bg:#080d19;--panel:#101827;--panel2:#141f31;--border:#273247;--text:#e6edf8;--muted:#a1afc4;--cyan:#6ce8dc;--violet:#aa9fff;--shadow:0 20px 70px #0005;--grid:rgba(105,137,175,.08);color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}body.light{--bg:#f3f6fa;--panel:#fff;--panel2:#eaf0f7;--border:#ccd7e5;--text:#182740;--muted:#51637c;--cyan:#00796e;--violet:#6750bf;--shadow:0 20px 70px #1a345410;--grid:rgba(60,85,120,.08);color-scheme:light}button,input,select,textarea{font:inherit}button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid var(--border);border-radius:8px;padding:9px 13px;background:var(--panel2);color:var(--text);cursor:pointer;transition:background .16s,border-color .16s}button:hover{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 8%,var(--panel2))}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}button.primary{background:var(--cyan);border-color:var(--cyan);color:var(--bg);font-weight:750}button.quiet{background:transparent;border-color:transparent;color:var(--muted)}a{color:var(--cyan)}[hidden]{display:none!important}h1,h2,h3,p{margin-top:0}h1{font-size:20px;letter-spacing:-.5px;margin-bottom:0;font-weight:600}h2{font-size:27px;line-height:1.2;letter-spacing:-.8px;margin-bottom:10px}h3{font-size:15px;line-height:1.4}p{color:var(--muted)}.app-shell{display:grid;grid-template-columns:210px minmax(0,1fr);min-height:100vh}.rail{border-right:1px solid var(--border);padding:32px 20px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;background:var(--panel)}.brand{display:flex;gap:11px;align-items:center;color:var(--text);text-decoration:none;font-size:21px;font-weight:800;letter-spacing:3px}.brand-mark{width:38px;height:42px;display:grid;place-items:center;border:1px solid var(--cyan);color:var(--cyan);border-radius:11px 2px 11px 2px;box-shadow:0 0 24px #6ce8dc15;letter-spacing:0;font-size:26px}.brand small{display:block;font-size:7px;letter-spacing:1.5px;color:var(--muted);font-weight:500}.rail nav{display:flex;flex-direction:column;gap:8px;margin-top:49px}.rail nav button{background:transparent;justify-content:flex-start;border-color:transparent;font-size:14px;padding:12px 15px;color:var(--muted)}.rail nav button span{font-size:20px;width:24px}.rail nav button.active{background:color-mix(in srgb,var(--cyan) 9%,var(--panel));border-color:color-mix(in srgb,var(--cyan) 24%,var(--border));color:var(--cyan)}.rail-footer{margin-top:auto;font-size:9px;letter-spacing:1.3px;padding-top:30px}.rail-footer p{letter-spacing:0;font-size:12px;margin-top:14px}.rail-footer button{font-size:11px;padding-left:0}.status-dot,.live-indicator{display:inline-block;width:6px;height:6px;background:var(--cyan);border-radius:50%;margin-right:8px;box-shadow:0 0 10px #6ce8dc55}main{padding:28px 32px 15px;min-width:0;max-width:1800px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:25px;border-bottom:1px solid var(--border);margin-bottom:28px}.eyebrow{font-size:9px;letter-spacing:1.6px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px}.header-actions,.button-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.snapshot-tag,.pill{border:1px solid var(--border);padding:4px 8px;border-radius:5px;color:var(--muted);font-size:9px;letter-spacing:1px}.explore-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:23px}.explore-heading h2{font-size:26px;margin:0}.explore-heading button{font-size:11px}.filter-bar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}input,textarea,select{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;max-width:100%}select{max-width:160px;font-size:11px}.search-field{display:flex;align-items:center;flex:1 1 230px;min-width:0;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding-left:12px;color:var(--muted)}.search-field input{border:0;background:none;flex:1;min-width:0;font-size:12px}.search-field>span{font-size:24px}.filter-bar button{font-size:11px}.explore-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.map-column{min-width:0}.map-frame{height:430px;position:relative;overflow:hidden;border:1px solid var(--border);border-radius:13px;background:radial-gradient(ellipse at 50% 45%,#3039682b,transparent 65%),var(--panel);box-shadow:inset 0 0 90px #0002}.map-frame canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.map-frame canvas:active{cursor:grabbing}.map-caption{position:absolute;top:17px;left:18px;right:18px;display:flex;align-items:center;font-size:9px;letter-spacing:1.2px;pointer-events:none;z-index:1}.map-caption #map-count{margin-left:auto;font-size:10px;letter-spacing:0;color:var(--muted)}.map-controls{position:absolute;bottom:43px;left:13px;display:flex;gap:5px;flex-wrap:wrap}.map-controls button{font-size:10px;padding:6px 9px;background:var(--panel);box-shadow:0 3px 14px #0002}.map-footer{display:flex;justify-content:space-between;position:absolute;bottom:13px;left:17px;right:17px;font-size:9px;color:var(--muted);pointer-events:none}.map-node-label{position:absolute;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;pointer-events:none;font-size:11px;border:1px solid var(--cyan);background:var(--panel);padding:4px 8px;border-radius:5px;z-index:2}.map-empty{position:absolute;inset:40% 15% auto;text-align:center;color:var(--muted)}.map-empty button{display:flex;margin:12px auto}.inspector{background:var(--panel);border:1px solid var(--border);border-radius:13px;overflow:hidden;min-width:0}.inspector-header{padding:17px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.inspector-header .eyebrow{margin:0;font-size:9px}.pill{font-size:7px;color:var(--cyan)}#record-detail{padding:19px}.inspector-empty{text-align:center;padding:45px 8px}.inspector-empty>span{font-size:50px;color:var(--violet);display:block;margin-bottom:20px}.inspector-empty p{font-size:12px}.record-title{font-size:21px;overflow-wrap:anywhere;margin:7px 0 12px}.record-id,.digest{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);overflow-wrap:anywhere;direction:ltr;text-align:left}.detail-section{padding-top:17px;margin-top:17px;border-top:1px solid var(--border)}.detail-section h3{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}.source-path{font:11px ui-monospace,monospace;direction:ltr;overflow-wrap:anywhere;text-align:left}.record-body{font-size:12px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto;margin-bottom:0;color:var(--text)}.edge-button{display:flex;width:100%;justify-content:flex-start;text-align:start;flex-wrap:wrap;margin-bottom:7px;font-size:11px;background:var(--bg)}.edge-button .edge-type{color:var(--violet);font:9px ui-monospace,monospace}.inspector .button-row button{font-size:10px;padding:7px 9px}.list-heading{display:flex;justify-content:space-between;align-items:center;margin:17px 0 9px}.list-heading h3{margin:0;font-size:12px}.list-heading h3 span{font-size:10px;font-weight:400;color:var(--muted);margin-left:6px}.list-heading button{font-size:10px}.record-list{display:grid;gap:7px;max-height:420px;overflow:auto;padding:2px}.record-item{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:start;padding:10px 13px;background:var(--panel);gap:13px;font-size:12px;border-color:var(--border)}.record-item.selected{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 6%,var(--panel))}.record-item .record-name{display:block;overflow-wrap:anywhere;font-weight:600}.record-item small{display:block;color:var(--muted);font-size:10px;overflow-wrap:anywhere}.kind-dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--violet)}.record-item>span:nth-child(2){flex:1;min-width:0}.record-item .tag{color:var(--muted);font-size:9px;flex:none}.muted{color:var(--muted);font-size:12px}.callout{background:color-mix(in srgb,var(--cyan) 5%,var(--panel));border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:8px;padding:14px 17px;margin:15px 0 22px;font-size:12px;color:var(--muted)}.callout.error{border-left-color:#ff9b9b}.hero{padding:45px 15px 35px;max-width:740px}.hero h2{font-size:clamp(34px,5vw,58px);line-height:1.12;letter-spacing:-2px;margin:16px 0}.hero h2 span{color:var(--cyan)}.hero p{font-size:15px;max-width:580px}.hero .button-row{margin-top:24px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}.stat{border:1px solid var(--border);border-radius:12px;padding:22px;background:var(--panel)}.stat strong{font-size:30px;font-weight:550;display:block;color:var(--cyan)}.stat span{color:var(--muted);font-size:12px}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:26px 0 16px}.section-heading h2{font-size:19px;margin:0}.section-heading>span{font-size:11px;color:var(--muted)}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature-card{display:block;text-align:start;padding:24px;background:var(--panel)}.feature-card h3{font-size:17px;margin:14px 0 10px}.feature-card p{font-size:12px;margin:0;font-weight:400}.card-number{font-size:9px;letter-spacing:1px;color:var(--violet)}.section-intro{padding:15px 0 20px;max-width:660px}.section-intro h2{font-size:34px;margin-top:12px}.section-intro p{font-size:13px}.ask-form{max-width:850px;padding:24px;border:1px solid var(--border);background:var(--panel);border-radius:12px}.ask-form label{font-size:12px;display:block;margin-bottom:10px}.ask-form textarea{display:block;width:100%;resize:vertical;background:var(--bg);margin-bottom:14px}.ask-form button{font-size:12px}#ask-results{max-width:850px;margin-top:24px}.answer-card{padding:20px;border:1px solid var(--border);border-radius:10px;margin:12px 0;background:var(--panel)}.answer-card h3{margin-bottom:10px}.answer-card p{white-space:pre-wrap;font-size:13px;overflow-wrap:anywhere}.answer-card .button-row{margin-top:12px}.source-list{display:grid;gap:12px}.source-card{padding:20px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}.source-card h3{overflow-wrap:anywhere;font-size:13px}.source-card button{font-size:11px;margin-top:13px}.compare-panel{margin-top:25px;border-top:1px solid var(--border)}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare-card{padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:10px;min-width:0}.compare-card h3{overflow-wrap:anywhere}.compare-card p{white-space:pre-wrap;max-height:300px;overflow:auto;font-size:12px;overflow-wrap:anywhere}.change-group{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px}.change-group h3{color:var(--cyan)}.change-group li{font-size:12px;overflow-wrap:anywhere;margin:8px 0}.workspace-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:32px;padding-top:15px;border-top:1px solid var(--border);font-size:8px;letter-spacing:1px;color:var(--muted)}.workspace-footer button{font-size:9px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:var(--panel2);color:var(--text);border:1px solid var(--cyan);border-radius:9px;padding:12px 20px;max-width:90vw;box-shadow:var(--shadow);z-index:50}.static-summary{display:none}.skip-link{position:fixed;left:15px;top:-100px;z-index:100;padding:12px;background:var(--panel)}.skip-link:focus{top:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}#show-more{margin-top:12px;font-size:11px}@media(min-width:1600px){.explore-grid{grid-template-columns:minmax(0,1fr) 350px}.map-frame{height:530px}}@media(max-width:1100px){.app-shell{grid-template-columns:175px minmax(0,1fr)}.rail{padding:28px 13px}main{padding:25px 22px}.explore-grid{grid-template-columns:minmax(0,1fr) 260px}.map-frame{height:390px}.explore-heading{align-items:flex-start;flex-direction:column}.header-actions .snapshot-tag{display:none}.brand{font-size:18px;gap:8px}.brand small{font-size:6px}.map-footer span:first-child{display:none}}@media(max-width:850px){.app-shell{grid-template-columns:1fr}.rail{height:auto;position:relative;flex-direction:row;align-items:center;padding:13px 18px;border-right:0;border-bottom:1px solid var(--border);gap:20px}.rail nav{flex-direction:row;margin:0;gap:3px;margin-left:auto}.rail nav button{padding:8px;font-size:11px}.rail nav button span{display:none}.rail-footer{display:none}.brand small{display:none}.brand-mark{width:29px;height:31px;font-size:20px}.explore-grid{grid-template-columns:minmax(0,1fr) 265px}.topbar{gap:10px}main{padding:22px 18px}.topbar h1{font-size:17px}.map-frame{height:380px}.feature-grid{gap:10px}.feature-card{padding:17px}.map-controls{bottom:35px}.map-controls button{font-size:9px;padding:5px 7px}}@media(max-width:650px){.rail{flex-wrap:wrap;gap:10px;padding:12px 15px}.rail nav{width:100%;justify-content:space-between;gap:0}.rail nav button{font-size:12px;padding:7px 12px}.rail nav button span{display:inline;width:auto;font-size:15px}.brand{font-size:17px}.explore-grid{grid-template-columns:1fr}.inspector{min-height:180px}.inspector-empty{padding:20px 10px}.inspector-empty>span{font-size:30px;margin-bottom:10px}.map-frame{height:350px}.record-list{max-height:270px}.topbar{align-items:flex-start;margin-bottom:22px}.header-actions button{font-size:10px;white-space:nowrap;padding:7px}.eyebrow{font-size:8px}.explore-heading h2{font-size:23px}.feature-grid{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:15px}.stat strong{font-size:26px}.stat span{font-size:10px}.hero{padding:22px 0}.hero p{font-size:13px}.section-heading{align-items:flex-start}.section-heading>span{display:none}.filter-bar select{max-width:calc(50vw - 35px)}.compare-grid{grid-template-columns:1fr}.workspace-footer #footer-digest{display:none}.ask-form{padding:17px}.section-intro h2{font-size:28px}.map-caption{left:13px;right:13px;font-size:8px}.map-caption #map-count{font-size:9px}.map-footer{font-size:8px}.record-item .tag{max-width:80px;overflow-wrap:anywhere}.source-card{padding:15px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}@media print{.app-shell,.toast{display:none!important}.static-summary{display:block!important;color:#111;background:#fff;padding:15px}.static-summary *{color:#111!important;overflow-wrap:anywhere}body{background:#fff;color:#111}.static-summary pre{white-space:pre-wrap}}
+
+.login-form{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-top:12px}.login-form label{display:flex;flex-direction:column;gap:4px;font-size:11px}.login-form input{font-size:12px}.login-form button{font-size:12px}
+.topbar>div:first-child{min-width:0}.topbar h1{overflow-wrap:anywhere}@media(max-width:650px){.rail nav button{padding:7px 9px}.rail nav button span{display:none}}
+
+.map-legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}.map-legend button{padding:3px 7px;font-size:9px;background:transparent;border-color:transparent;color:var(--muted)}.map-legend .kind-dot{width:5px;height:5px}
+
+.map-frame.is-planar{background:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),var(--panel);background-size:30px 30px,30px 30px,auto}.map-depth-key{position:absolute;top:43px;left:18px;display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px;pointer-events:none;z-index:1}.map-depth-key>span:last-child{margin-left:2px}.depth-far,.depth-near{display:inline-block;border-radius:50%;background:var(--cyan)}.depth-far{width:5px;height:5px;opacity:.45}.depth-near{width:11px;height:11px;box-shadow:inset -2px -2px 4px #0005}.map-footer{gap:8px;flex-wrap:wrap}.map-caption{gap:5px}#map-interaction-hint{display:inline}@media(max-width:650px){.map-depth-key{left:13px;font-size:8px}.map-footer{bottom:9px;gap:3px;font-size:8px}.map-footer span{max-width:100%}.map-controls{bottom:46px}}
+</style>
+</head>
+<body><style>.demo-ribbon{position:relative;z-index:30;display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:#101c28;color:#fff;font:600 14px system-ui}.demo-ribbon a{color:#98e8d8}.demo-ribbon button{background:transparent;color:#fff;border:1px solid #6f8c9b;border-radius:.5rem;padding:.25rem .6rem;cursor:pointer}.demo-ribbon button[aria-pressed=true]{border-color:#98e8d8;color:#98e8d8}.demo-ribbon .fiction{color:#ffd99a}</style><div class="demo-ribbon" id="demo-ribbon" data-corpus="support"><a href="index.html" id="demo-back">← חזרה להדגמה</a><span id="demo-corpus-label"></span><span><button type="button" id="demo-he" aria-pressed="true">עברית</button> <button type="button" id="demo-en" aria-pressed="false">English</button></span></div>
+<a class="skip-link" href="#workspace-main">Skip to workspace</a>
+<div class="app-shell" id="app">
+  <aside class="rail" aria-label="Main navigation">
+    <a class="brand" href="#explore" aria-label="Evidence Workspace home"><span class="brand-mark" aria-hidden="true">E</span><span>EVIDENCE<small>WORKSPACE</small></span></a>
+    <nav aria-label="Workspace sections">
+      <button data-view="home"><span aria-hidden="true">⌂</span>Home</button>
+      <button data-view="ask"><span aria-hidden="true">⌕</span>Ask</button>
+      <button data-view="explore" class="active" aria-current="page"><span aria-hidden="true">◈</span>Explore</button>
+      <button data-view="sources"><span aria-hidden="true">▤</span>Sources</button>
+      <button data-view="changes"><span aria-hidden="true">↗</span>Changes</button>
+    </nav>
+    <div class="rail-footer"><span class="status-dot"></span><span id="connection-label">OFFLINE SNAPSHOT</span><p>Knowledge with a trail.<br>Every record has a source.</p><button id="theme-toggle" class="quiet">Switch to light theme</button></div>
+  </aside>
+  <main id="workspace-main" tabindex="-1">
+    <header class="topbar"><div><span class="eyebrow" id="customer-name">PERSONAL WORKSPACE</span><h1 id="workspace-title" dir="auto">Your knowledge, connected.</h1></div><div class="header-actions"><span class="snapshot-tag" id="snapshot-tag">SOURCE SNAPSHOT</span><button id="help-toggle" class="quiet" aria-expanded="false" aria-controls="help-panel">How to explore</button></div></header>
+    <div id="help-panel" class="callout" hidden>Search for a topic, select a record, then inspect its sources and labeled connections. Drag empty space to orbit; Shift-drag to pan; scroll to zoom. Use the record list for full keyboard access. Position, depth, node size, and the reference grid are layout choices, not evidence of a relationship.</div>
+    <section id="session-panel" class="callout" hidden aria-label="Workspace access"><div class="button-row"><span id="session-status">Checking workspace access…</span><button id="session-logout" hidden>Sign out</button></div><form id="login-form" class="login-form" hidden><label>Username <input id="login-username" autocomplete="username" required></label><label>Password <input id="login-password" type="password" autocomplete="current-password" required></label><button type="submit">Sign in</button></form></section>
+    <div id="app-error" class="callout error" role="alert" hidden></div>
+    <section data-panel="home" hidden aria-label="Workspace home">
+      <div class="hero"><span class="eyebrow">A MAP, WITH THE EVIDENCE ATTACHED</span><h2>Find the context.<br><span>Follow the source.</span></h2><p>Explore your documentation and code as a connected workspace. Inspect what is known, see where it comes from, and notice what is missing.</p><div class="button-row"><button class="primary" data-go="explore">Explore the map →</button><button data-go="ask">Find an answer</button></div></div>
+      <div class="stats" id="home-stats"></div>
+      <div class="section-heading"><h2>Start somewhere useful</h2><span>Three ways into your knowledge</span></div>
+      <div class="feature-grid"><button class="feature-card" data-go="explore"><span class="card-number">01 / DISCOVER</span><h3>See what connects</h3><p>Follow labeled relationships between records and inspect one neighborhood at a time.</p></button><button class="feature-card" data-go="ask"><span class="card-number">02 / UNDERSTAND</span><h3>Find source passages</h3><p>Search this snapshot with English or Hebrew terms and review the original evidence.</p></button><button class="feature-card" data-go="changes"><span class="card-number">03 / MAINTAIN</span><h3>Notice what changed</h3><p>Review changed records before relying on an earlier answer or context packet.</p></button></div>
+      <div class="callout">This workspace is a source snapshot. Inclusion and graph position do not establish that a claim is true. Verify the cited version before acting on it.</div>
+    </section>
+    <section data-panel="explore" aria-label="Explore knowledge">
+      <div class="explore-heading"><div><span class="eyebrow">KNOWLEDGE CONSTELLATION</span><h2>Everything has a context.</h2></div><div class="button-row"><button id="save-view">Save view</button><button id="restore-view" disabled>Restore view</button><button id="mode-toggle" aria-pressed="false">Use 2D view</button></div></div>
+      <form id="filter-form" class="filter-bar" role="search"><label class="search-field"><span aria-hidden="true">⌕</span><input id="search" type="search" dir="auto" placeholder="Find a concept, function, or phrase…" aria-label="Search records"></label><label><span class="sr-only">Domain</span><select id="domain-filter"><option value="">All domains</option></select></label><label><span class="sr-only">Record kind</span><select id="kind-filter"><option value="">All kinds</option></select></label><label><span class="sr-only">Relationship type</span><select id="edge-filter"><option value="">All relationships</option></select></label><label><span class="sr-only">Source</span><select id="source-filter"><option value="">All sources</option></select></label><button type="button" id="clear-filters" class="quiet">Clear</button></form>
+      <div id="map-renderer-status" class="callout" role="status" hidden></div>
+      <div class="explore-grid"><div class="map-column"><div class="map-frame"><div class="map-caption"><span class="live-indicator"></span><span id="map-mode-label">3D SPATIAL MAP</span><span id="map-count"></span></div><div id="map-depth-key" class="map-depth-key" aria-label="Depth cues show layout only"><span class="depth-far" aria-hidden="true"></span>Far<span class="depth-near" aria-hidden="true"></span>Near <span>· layout depth</span></div><canvas id="spatial-canvas" aria-label="Spatial knowledge map. Use the record list below for keyboard access." role="img"></canvas><canvas id="flat-canvas" hidden aria-label="Two-dimensional knowledge map. Use the record list below for keyboard access." role="img"></canvas><div id="map-label" class="map-node-label" hidden></div><div class="map-empty" id="map-empty" hidden>No records match these filters.<button id="empty-clear">Clear filters</button></div><div class="map-controls" aria-label="Map controls"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="rotate-left" aria-label="Rotate map left">↶</button><button id="rotate-right" aria-label="Rotate map right">↷</button><button id="reset-map">Reset view</button><button id="fit-selected">Focus selected</button></div><div class="map-footer"><span id="map-interaction-hint">Drag to orbit · Shift-drag to pan</span><span id="motion-label">Positions and depth are layout only</span></div></div>
+      <div id="map-legend" class="map-legend" aria-label="Domain colors"></div><div class="list-heading"><h3>Records <span id="record-count"></span></h3><div class="button-row"><button id="history-back" class="quiet" disabled aria-label="Previous selected record">← Back</button><button id="history-forward" class="quiet" disabled aria-label="Next selected record">Forward →</button></div></div><div id="record-list" class="record-list" role="list" aria-label="Matching records"></div><button id="show-more" hidden>Show 100 more records</button></div>
+      <aside class="inspector" aria-label="Selected record evidence"><div class="inspector-header"><span class="eyebrow">EVIDENCE PANEL</span><span class="pill">SOURCE-BOUND</span></div><div id="record-detail"><div class="inspector-empty"><span aria-hidden="true">◈</span><h3>Choose a point of interest.</h3><p>Select a map node or a record from the list. Its source, content, and typed relationships appear here.</p></div></div></aside></div>
+      <section id="compare-panel" class="compare-panel" hidden aria-label="Record comparison"><div class="section-heading"><h2>Compare records</h2><button id="clear-compare">Clear comparison</button></div><div id="compare-content" class="compare-grid"></div></section>
+    </section>
+    <section data-panel="ask" hidden aria-label="Find answers"><div class="section-intro"><span class="eyebrow">START WITH A QUESTION</span><h2>Ask. Inspect. Understand.</h2><p id="ask-description">Search passages in this snapshot. Results are excerpts to verify, not a generated or verified answer.</p></div><form id="ask-form" class="ask-form"><label for="question">What do you want to understand?</label><textarea id="question" dir="auto" rows="3" placeholder="Find how source changes are tracked…" required></textarea><div class="button-row"><button class="primary" type="submit" id="ask-submit">Find supporting sources →</button><button type="submit" id="answer-submit" hidden>Show cited response</button><span class="muted">English · עברית</span></div></form><div id="ask-results" aria-live="polite"></div></section>
+    <section data-panel="sources" hidden aria-label="Source inventory"><div class="section-intro"><span class="eyebrow">THE GROUND UNDER THE MAP</span><h2>Inspect your sources.</h2><p>This export records source identities and digests. It cannot check for changes after export.</p></div><div id="source-list" class="source-list"></div></section>
+    <section data-panel="changes" hidden aria-label="Source changes"><div class="section-intro"><span class="eyebrow">KNOWLEDGE HAS A HISTORY</span><h2>See what moved.</h2><p>Changes compare this snapshot with its supplied predecessor. Review affected sources before reusing an older answer.</p></div><div id="changes-list"></div></section>
+    <footer class="workspace-footer"><span>EVIDENCE WORKSPACE / LOCAL</span><span id="footer-digest"></span><button id="print-view" class="quiet">Print source summary</button></footer>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<section class="static-summary" aria-label="Printable snapshot summary"><h1>Atlas source snapshot</h1><section><h1>Evidence Workspace · Fictional support desk</h1><p>Offline snapshot; source freshness must be checked before use.</p><article><h2>Fictional exceptions and gaps</h2><pre># Fictional exceptions and gaps
+
+This document is fictional. It adds context to the demonstration procedures.
+</pre><p>support/exceptions.en.md</p></article><article><h2>Emergency access</h2><pre>## Emergency access
+
+Emergency access still requires an administrator to apply the change. If the service owner is unavailable, the technician records that approval is missing and escalates; the procedure does not authorize the technician to invent approval.
+</pre><p>support/exceptions.en.md</p></article><article><h2>Unspecified questions</h2><pre>## Unspecified questions
+
+These fictional procedures do not state who pays for a restore, how long backups are retained, or the contact number for an on-call technician. A source search cannot establish those details from this selected corpus.</pre><p>support/exceptions.en.md</p></article><article><h2>חריגים ופערים בדיוניים</h2><pre># חריגים ופערים בדיוניים
+
+מסמך זה בדיוני. הוא מוסיף הקשר לנהלי ההדגמה.
+</pre><p>support/exceptions.he.md</p></article><article><h2>גישת חירום</h2><pre>## גישת חירום
+
+גם גישת חירום דורשת שמנהל מערכת יבצע את השינוי. אם בעל השירות אינו זמין, הטכנאי מתעד שהאישור חסר ומסלים את הטיפול; הנוהל אינו מסמיך את הטכנאי להמציא אישור.
+</pre><p>support/exceptions.he.md</p></article><article><h2>שאלות שאין להן תשובה</h2><pre>## שאלות שאין להן תשובה
+
+הנהלים הבדיוניים אינם מציינים מי משלם על שחזור, כמה זמן נשמרים גיבויים או מה מספר הטלפון של טכנאי כונן. חיפוש במקורות שנבחרו אינו יכול לקבוע פרטים אלה.</pre><p>support/exceptions.he.md</p></article><article><h2>Fictional support desk procedures</h2><pre># Fictional support desk procedures
+
+This is a fictional demonstration corpus. It describes no actual company or customer policy.
+</pre><p>support/procedures.en.md</p></article><article><h2>Access request</h2><pre>## Access request
+
+A requester submits an access request naming the service and business reason. In this fictional workflow, a service owner approves the business need and an administrator applies the access change. A technician records the approval reference before making the change. A viewer may read approved procedures but cannot approve access.
+</pre><p>support/procedures.en.md</p></article><article><h2>Restore request</h2><pre>## Restore request
+
+Before a restore, a technician records the affected service and desired restore point. The service owner approves the restore target. The technician tests the backup in an isolated environment and compares the restored content with the expected source identity before use.
+</pre><p>support/procedures.en.md</p></article><article><h2>Incident escalation</h2><pre>## Incident escalation
+
+The first responder records the observed symptom, affected service, start time, and evidence. If the service is unavailable, the responder escalates to the service owner. The incident record must distinguish what was observed from what is only suspected.</pre><p>support/procedures.en.md</p></article><article><h2>נהלי מוקד תמיכה בדיוני</h2><pre># נהלי מוקד תמיכה בדיוני
+
+זהו מאגר הדגמה בדיוני. הוא אינו מתאר מדיניות של חברה או לקוח אמיתיים.
+</pre><p>support/procedures.he.md</p></article><article><h2>בקשת גישה</h2><pre>## בקשת גישה
+
+המבקש מגיש בקשת גישה עם שם השירות והסיבה העסקית. בתהליך הבדיוני הזה, בעל השירות מאשר את הצורך העסקי ומנהל המערכת מבצע את שינוי הגישה. הטכנאי מתעד את אסמכתת האישור לפני השינוי. צופה רשאי לקרוא נהלים מאושרים אך אינו רשאי לאשר גישה.
+</pre><p>support/procedures.he.md</p></article><article><h2>בקשת שחזור</h2><pre>## בקשת שחזור
+
+לפני שחזור, טכנאי מתעד את השירות שנפגע ואת נקודת השחזור הרצויה. בעל השירות מאשר את יעד השחזור. הטכנאי בודק את הגיבוי בסביבה מבודדת ומשווה את התוכן ששוחזר לזהות המקור הצפויה לפני שימוש.
+</pre><p>support/procedures.he.md</p></article><article><h2>הסלמת תקלה</h2><pre>## הסלמת תקלה
+
+המטפל הראשון מתעד את התסמין שנצפה, את השירות שנפגע, את זמן תחילת התקלה ואת הראיות. אם השירות אינו זמין, המטפל מסלים את הטיפול לבעל השירות. רישום התקלה חייב להבחין בין מה שנצפה לבין מה שהוא רק השערה.</pre><p>support/procedures.he.md</p></article></section></section>
+<noscript><style>.app-shell{display:none}.static-summary{display:block}</style><p>JavaScript is disabled. The source summary above remains available; interactive exploration requires JavaScript.</p></noscript>
+<script id="atlas-data" type="application/json">{"aliases":{"access":["access"],"approval":["access"],"backup":["backup"],"escalation":["incident"],"incident":["incident"],"outage":["incident"],"permission":["access"],"recovery":["backup"],"restore":["backup"],"אירוע":["incident"],"אישור":["access"],"גיבוי":["backup"],"גישה":["access"],"הסלמה":["incident"],"הרשאות":["access"],"שחזור":["backup"],"תקלה":["incident"]},"backend":false,"changes":{"added":["support/exceptions.en.md","support/exceptions.he.md","support/procedures.en.md","support/procedures.he.md"],"modified":[],"removed":[]},"claims":[],"customer_id":"fictional-support-desk","edges":[{"id":"7b2eae8cd32855fc41ddc1d9","source":"fictional-support-desk:record:82c9e9158fb398db75ef68ab","target":"fictional-support-desk:record:c612537624b8702c40e073d3","type":"same_source"},{"id":"763304cec57bbe0d5d30b3cf","source":"fictional-support-desk:record:c612537624b8702c40e073d3","target":"fictional-support-desk:record:c46c04524704d9a5badb34e5","type":"same_source"},{"id":"5ea80155c1ea46a7768aa024","source":"fictional-support-desk:record:1d31490d8a8e84778825e524","target":"fictional-support-desk:record:2211591629ccb44031c546a5","type":"same_source"},{"id":"326f8c93af65c445a6dabe18","source":"fictional-support-desk:record:2211591629ccb44031c546a5","target":"fictional-support-desk:record:3e2aa7db1e77d2f97ff8b537","type":"same_source"},{"id":"5b936672756c50af8ff1aacc","source":"fictional-support-desk:record:0d860838e408b15df48918dc","target":"fictional-support-desk:record:a44e802ceb0f8d98472df918","type":"same_source"},{"id":"b5b8c8d6a9e78bcf30860e2f","source":"fictional-support-desk:record:a44e802ceb0f8d98472df918","target":"fictional-support-desk:record:90ae93efa33b7bd869211ad6","type":"same_source"},{"id":"c1a5b2b737dee0ce0f7137b2","source":"fictional-support-desk:record:90ae93efa33b7bd869211ad6","target":"fictional-support-desk:record:19a78effe91d664cfa0cd5f6","type":"same_source"},{"id":"70df9d817a4225b2c08facbc","source":"fictional-support-desk:record:ef320e77dd75bab598fb3c99","target":"fictional-support-desk:record:32a6cb2fa6088eaf53b131e2","type":"same_source"},{"id":"ed5339cb7a4532cf14d16feb","source":"fictional-support-desk:record:32a6cb2fa6088eaf53b131e2","target":"fictional-support-desk:record:5e13eb5cb66c61faf1579a45","type":"same_source"},{"id":"bb8fcdeb3806f9d1768b5191","source":"fictional-support-desk:record:5e13eb5cb66c61faf1579a45","target":"fictional-support-desk:record:0e6be6d4067b001c79b47034","type":"same_source"}],"records":[{"body":"# Fictional exceptions and gaps\n\nThis document is fictional. It adds context to the demonstration procedures.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:82c9e9158fb398db75ef68ab","kind":"section","locator":{"end_line":4,"path":"support/exceptions.en.md","start_line":1},"source_digest":"f45ab74270a6b105975fc1c1eefc89997d530e04b33473684cfe714496432a46","source_id":"fictional-support-desk:source:67c8154608ef98c59b04","title":"Fictional exceptions and gaps"},{"body":"## Emergency access\n\nEmergency access still requires an administrator to apply the change. If the service owner is unavailable, the technician records that approval is missing and escalates; the procedure does not authorize the technician to invent approval.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:c612537624b8702c40e073d3","kind":"section","locator":{"end_line":8,"path":"support/exceptions.en.md","start_line":5},"source_digest":"f45ab74270a6b105975fc1c1eefc89997d530e04b33473684cfe714496432a46","source_id":"fictional-support-desk:source:67c8154608ef98c59b04","title":"Emergency access"},{"body":"## Unspecified questions\n\nThese fictional procedures do not state who pays for a restore, how long backups are retained, or the contact number for an on-call technician. A source search cannot establish those details from this selected corpus.","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:c46c04524704d9a5badb34e5","kind":"section","locator":{"end_line":11,"path":"support/exceptions.en.md","start_line":9},"source_digest":"f45ab74270a6b105975fc1c1eefc89997d530e04b33473684cfe714496432a46","source_id":"fictional-support-desk:source:67c8154608ef98c59b04","title":"Unspecified questions"},{"body":"# חריגים ופערים בדיוניים\n\nמסמך זה בדיוני. הוא מוסיף הקשר לנהלי ההדגמה.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:1d31490d8a8e84778825e524","kind":"section","locator":{"end_line":4,"path":"support/exceptions.he.md","start_line":1},"source_digest":"a86a3421fe90c7c970ea519cc8f053c3629b8790e0f9344bcb1c0608dcb1a989","source_id":"fictional-support-desk:source:1c932b4b2c9254bc8c4d","title":"חריגים ופערים בדיוניים"},{"body":"## גישת חירום\n\nגם גישת חירום דורשת שמנהל מערכת יבצע את השינוי. אם בעל השירות אינו זמין, הטכנאי מתעד שהאישור חסר ומסלים את הטיפול; הנוהל אינו מסמיך את הטכנאי להמציא אישור.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:2211591629ccb44031c546a5","kind":"section","locator":{"end_line":8,"path":"support/exceptions.he.md","start_line":5},"source_digest":"a86a3421fe90c7c970ea519cc8f053c3629b8790e0f9344bcb1c0608dcb1a989","source_id":"fictional-support-desk:source:1c932b4b2c9254bc8c4d","title":"גישת חירום"},{"body":"## שאלות שאין להן תשובה\n\nהנהלים הבדיוניים אינם מציינים מי משלם על שחזור, כמה זמן נשמרים גיבויים או מה מספר הטלפון של טכנאי כונן. חיפוש במקורות שנבחרו אינו יכול לקבוע פרטים אלה.","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:3e2aa7db1e77d2f97ff8b537","kind":"section","locator":{"end_line":11,"path":"support/exceptions.he.md","start_line":9},"source_digest":"a86a3421fe90c7c970ea519cc8f053c3629b8790e0f9344bcb1c0608dcb1a989","source_id":"fictional-support-desk:source:1c932b4b2c9254bc8c4d","title":"שאלות שאין להן תשובה"},{"body":"# Fictional support desk procedures\n\nThis is a fictional demonstration corpus. It describes no actual company or customer policy.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:0d860838e408b15df48918dc","kind":"section","locator":{"end_line":4,"path":"support/procedures.en.md","start_line":1},"source_digest":"7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67","source_id":"fictional-support-desk:source:b1f824ba8793b52d7111","title":"Fictional support desk procedures"},{"body":"## Access request\n\nA requester submits an access request naming the service and business reason. In this fictional workflow, a service owner approves the business need and an administrator applies the access change. A technician records the approval reference before making the change. A viewer may read approved procedures but cannot approve access.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:a44e802ceb0f8d98472df918","kind":"section","locator":{"end_line":8,"path":"support/procedures.en.md","start_line":5},"source_digest":"7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67","source_id":"fictional-support-desk:source:b1f824ba8793b52d7111","title":"Access request"},{"body":"## Restore request\n\nBefore a restore, a technician records the affected service and desired restore point. The service owner approves the restore target. The technician tests the backup in an isolated environment and compares the restored content with the expected source identity before use.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:90ae93efa33b7bd869211ad6","kind":"section","locator":{"end_line":12,"path":"support/procedures.en.md","start_line":9},"source_digest":"7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67","source_id":"fictional-support-desk:source:b1f824ba8793b52d7111","title":"Restore request"},{"body":"## Incident escalation\n\nThe first responder records the observed symptom, affected service, start time, and evidence. If the service is unavailable, the responder escalates to the service owner. The incident record must distinguish what was observed from what is only suspected.","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:19a78effe91d664cfa0cd5f6","kind":"section","locator":{"end_line":15,"path":"support/procedures.en.md","start_line":13},"source_digest":"7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67","source_id":"fictional-support-desk:source:b1f824ba8793b52d7111","title":"Incident escalation"},{"body":"# נהלי מוקד תמיכה בדיוני\n\nזהו מאגר הדגמה בדיוני. הוא אינו מתאר מדיניות של חברה או לקוח אמיתיים.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:ef320e77dd75bab598fb3c99","kind":"section","locator":{"end_line":4,"path":"support/procedures.he.md","start_line":1},"source_digest":"e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07","source_id":"fictional-support-desk:source:a6a71e57e624d24df40f","title":"נהלי מוקד תמיכה בדיוני"},{"body":"## בקשת גישה\n\nהמבקש מגיש בקשת גישה עם שם השירות והסיבה העסקית. בתהליך הבדיוני הזה, בעל השירות מאשר את הצורך העסקי ומנהל המערכת מבצע את שינוי הגישה. הטכנאי מתעד את אסמכתת האישור לפני השינוי. צופה רשאי לקרוא נהלים מאושרים אך אינו רשאי לאשר גישה.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:32a6cb2fa6088eaf53b131e2","kind":"section","locator":{"end_line":8,"path":"support/procedures.he.md","start_line":5},"source_digest":"e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07","source_id":"fictional-support-desk:source:a6a71e57e624d24df40f","title":"בקשת גישה"},{"body":"## בקשת שחזור\n\nלפני שחזור, טכנאי מתעד את השירות שנפגע ואת נקודת השחזור הרצויה. בעל השירות מאשר את יעד השחזור. הטכנאי בודק את הגיבוי בסביבה מבודדת ומשווה את התוכן ששוחזר לזהות המקור הצפויה לפני שימוש.\n","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:5e13eb5cb66c61faf1579a45","kind":"section","locator":{"end_line":12,"path":"support/procedures.he.md","start_line":9},"source_digest":"e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07","source_id":"fictional-support-desk:source:a6a71e57e624d24df40f","title":"בקשת שחזור"},{"body":"## הסלמת תקלה\n\nהמטפל הראשון מתעד את התסמין שנצפה, את השירות שנפגע, את זמן תחילת התקלה ואת הראיות. אם השירות אינו זמין, המטפל מסלים את הטיפול לבעל השירות. רישום התקלה חייב להבחין בין מה שנצפה לבין מה שהוא רק השערה.","document_kind":"procedure","domain":"fictional-support-desk","id":"fictional-support-desk:record:0e6be6d4067b001c79b47034","kind":"section","locator":{"end_line":15,"path":"support/procedures.he.md","start_line":13},"source_digest":"e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07","source_id":"fictional-support-desk:source:a6a71e57e624d24df40f","title":"הסלמת תקלה"}],"schema":"atlas-workspace/1.0","snapshot_digest":"9c4b6007b09a0db4476c4a985d3479e330bc8af954e4d4aafadb631451f5a388","sources":[{"digest":"f45ab74270a6b105975fc1c1eefc89997d530e04b33473684cfe714496432a46","id":"fictional-support-desk:source:67c8154608ef98c59b04","kind":"file","path":"support/exceptions.en.md","role":"procedure"},{"digest":"a86a3421fe90c7c970ea519cc8f053c3629b8790e0f9344bcb1c0608dcb1a989","id":"fictional-support-desk:source:1c932b4b2c9254bc8c4d","kind":"file","path":"support/exceptions.he.md","role":"procedure"},{"digest":"7ec8f59722bb20703160cfa53ff510d42cc0494d4cb7fee694d01e7e13f03f67","id":"fictional-support-desk:source:b1f824ba8793b52d7111","kind":"file","path":"support/procedures.en.md","role":"procedure"},{"digest":"e29504c96d2caf01a22325c1b690fd934c9440cac1ba0c74b69277cac4a06a07","id":"fictional-support-desk:source:a6a71e57e624d24df40f","kind":"file","path":"support/procedures.he.md","role":"procedure"}],"title":"Evidence Workspace · Fictional support desk","vocabulary":[{"aliases":["access","permission","approval","גישה","הרשאות","אישור"],"definition":"Fictional account access request","id":"access"},{"aliases":["backup","restore","recovery","גיבוי","שחזור"],"definition":"Fictional backup and restore task","id":"backup"},{"aliases":["incident","outage","escalation","תקלה","אירוע","הסלמה"],"definition":"Fictional support incident","id":"incident"}]}</script>
+<script>"use strict";
+/* Atlas Workspace: dependency-free browser client. Source text is never HTML. */
+(() => {
+    'use strict';
+    const el = (id) => {
+        const value = document.getElementById(id);
+        if (!value)
+            throw new Error(`Missing interface element: ${id}`);
+        return value;
+    };
+    const node = (tag, text = '', className = '') => {
+        const n = document.createElement(tag);
+        n.textContent = text;
+        if (className)
+            n.className = className;
+        return n;
+    };
+    const button = (text, run, className = '') => {
+        const n = node('button', text, className);
+        n.type = 'button';
+        n.addEventListener('click', run);
+        return n;
+    };
+    let toastTimer = 0;
+    function toast(message) { el('toast').textContent = message; el('toast').hidden = false; window.clearTimeout(toastTimer); toastTimer = window.setTimeout(() => { el('toast').hidden = true; }, 4500); }
+    function readPreference(key) { try {
+        return localStorage.getItem(key);
+    }
+    catch {
+        return null;
+    } }
+    function writePreference(key, value) { try {
+        localStorage.setItem(key, value);
+        return true;
+    }
+    catch {
+        return false;
+    } }
+    function tokens(value) { return value.normalize('NFKC').toLocaleLowerCase().match(/[\p{L}\p{N}]+/gu) || []; }
+    function normalized(value) { return tokens(value).join(' '); }
+    function hash(value) { let h = 2166136261; for (let i = 0; i < value.length; i++) {
+        h ^= value.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+    } return h >>> 0; }
+    const palette = [[.43, .91, .86], [.67, .61, 1], [.43, .7, 1], [1, .72, .45], [.92, .55, .75], [.57, .84, .62]];
+    let data;
+    try {
+        data = JSON.parse(el('atlas-data').textContent || '{}');
+        if (data.schema !== 'atlas-workspace/1.0' || !Array.isArray(data.records) || !Array.isArray(data.edges) || !Array.isArray(data.sources))
+            throw new Error('Unsupported or incomplete snapshot. Re-export with a compatible Atlas Workspace version.');
+        for (const record of data.records)
+            if (!record.id || typeof record.title !== 'string' || typeof record.body !== 'string')
+                throw new Error('Snapshot contains a malformed record.');
+    }
+    catch (error) {
+        el('app-error').textContent = `Cannot open snapshot: ${error instanceof Error ? error.message : String(error)}`;
+        el('app-error').hidden = false;
+        return;
+    }
+    data.aliases || (data.aliases = {});
+    data.changes || (data.changes = { added: [], modified: [], removed: [] });
+    const records = new Map(data.records.map(r => [r.id, r]));
+    const symbolicEntities = new Map((data.symbolic_graph?.entities || []).map(e => [e.id, e]));
+    const sources = new Map(data.sources.map(s => [s.id, s]));
+    const connected = data.backend === true && /^https?:$/.test(location.protocol);
+    let csrfToken = '';
+    let sessionRole = '';
+    async function loadSession() {
+        if (!connected)
+            return;
+        el('session-panel').hidden = false;
+        try {
+            const response = await fetch('/api/session', { credentials: 'same-origin' });
+            if (!response.ok) {
+                sessionRole = '';
+                csrfToken = '';
+            }
+            else {
+                const session = await response.json();
+                sessionRole = String(session.role || '');
+                csrfToken = String(session.csrf_token || session.csrf || '');
+            }
+            el('session-status').textContent = sessionRole ? `Signed in · ${sessionRole}` : 'Sign in to query this private workspace.';
+            el('login-form').hidden = !!sessionRole;
+            el('session-logout').hidden = !sessionRole;
+        }
+        catch {
+            el('session-status').textContent = 'The backend is unavailable. Offline source inspection remains available.';
+            el('login-form').hidden = true;
+        }
+    }
+    if (connected)
+        void loadSession();
+    el('login-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch('/api/login', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: el('login-username').value, password: el('login-password').value }) });
+            el('login-password').value = '';
+            if (!response.ok)
+                throw new Error('Sign-in failed. Check your credentials.');
+            // Fetch the authenticated snapshot instead of retaining the previous page.
+            location.reload();
+        }
+        catch (error) {
+            el('session-status').textContent = error instanceof Error ? error.message : String(error);
+        }
+    });
+    el('session-logout').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/logout', { method: 'POST', credentials: 'same-origin', headers: { 'X-CSRF-Token': csrfToken } });
+            if (!response.ok)
+                throw new Error('Sign-out failed.');
+            location.reload();
+        }
+        catch (error) {
+            toast(error instanceof Error ? error.message : String(error));
+        }
+    });
+    const viewKey = `atlas-view:${data.customer_id}:${data.snapshot_digest}`;
+    let selected = null;
+    let filtered = [];
+    let selectedNeighborhood = null;
+    let neighborhoodDepth = 1;
+    let recordLimit = 100;
+    let compare = [];
+    let history = [];
+    let historyIndex = -1;
+    let selectedView = 'explore';
+    const domains = [...new Set(data.records.map(r => r.domain || 'General'))].sort();
+    const kindColor = (r) => palette[hash(r.domain || r.kind || 'record') % palette.length];
+    const colorCSS = (r) => `rgb(${kindColor(r).map(c => Math.round(c * 255)).join(',')})`;
+    const retrievalStopwords = new Set('a an and are as at be by can do does for from happens how if in is it its of on or that the their this to was were what when where which who why with not no'.split(' '));
+    const errorWords = new Set('error errors exception exceptions fail fails failed failure missing unavailable'.split(' '));
+    const negativeConditions = new Set('installed found available configured supported permitted present enabled'.split(' '));
+    const methods = new Set('get post put patch delete head options'.split(' '));
+    const queryCounts = new Map();
+    const documentFrequency = new Map();
+    let totalLength = 0;
+    for (const record of data.records) {
+        const counts = new Map();
+        for (const word of [...tokens(record.title), ...tokens(record.title), ...tokens(record.body)])
+            counts.set(word, (counts.get(word) || 0) + 1);
+        queryCounts.set(record.id, counts);
+        totalLength += [...counts.values()].reduce((a, b) => a + b, 0);
+        for (const word of counts.keys())
+            documentFrequency.set(word, (documentFrequency.get(word) || 0) + 1);
+    }
+    const averageLength = Math.max(1, totalLength / Math.max(1, data.records.length));
+    function conditionText(value) {
+        const expanded = value.normalize('NFKC').toLocaleLowerCase().replace(/\b(is|are|was|were|has|have|had|does|do|did|can|could|should|would|must)n['’]t\b/g, '$1 not');
+        return tokens(expanded).join(' ');
+    }
+    function rankSearch(question) {
+        const raw = tokens(question);
+        if (!raw.length)
+            return { hits: data.records.map(record => ({ record, score: 0, signals: [] })), intent: 'browse', anchors: [] };
+        const expansions = new Set(raw);
+        const normalizedQuestion = normalized(question);
+        for (const [alias, canonical] of Object.entries(data.aliases)) {
+            if (alias && canonical.length === 1 && (' ' + normalizedQuestion + ' ').includes(' ' + alias + ' ')) {
+                const term = (data.vocabulary || []).find(t => t.id === canonical[0]);
+                if (term)
+                    for (const form of [term.id, ...term.aliases])
+                        for (const word of tokens(form))
+                            expansions.add(word);
+            }
+        }
+        const anchors = [];
+        const add = (kind, value) => { if (value && !anchors.some(a => a.kind === kind && a.value === value))
+            anchors.push({ kind, value }); };
+        for (const route of question.match(/\/(?:[\w:@${}.*~-]+\/?)+/g) || [])
+            add('route_path', route.toLocaleLowerCase());
+        for (const match of question.matchAll(/[\x60"']([^\x60"'\n]+)[\x60"']/g)) {
+            const phrase = normalized(match[1]);
+            if (tokens(phrase).length > 1)
+                add('quoted_phrase', phrase);
+        }
+        for (const symbol of question.match(/\b(?:[A-Za-z_$][\w$]*\.)+[A-Za-z_$][\w$]*\b|\b[A-Za-z_$][\w$]*_[\w$]+\b|\b[a-z]+(?:[A-Z][A-Za-z0-9]*)+\b/g) || [])
+            add('symbol', symbol.toLocaleLowerCase());
+        for (let i = 0; i < raw.length - 1; i++)
+            if (!retrievalStopwords.has(raw[i]) && !retrievalStopwords.has(raw[i + 1]))
+                add('phrase', raw[i] + ' ' + raw[i + 1]);
+        const words = new Set(raw);
+        const httpMethods = [...methods].filter(m => words.has(m)).sort();
+        const conditions = [...negativeConditions].filter(w => words.has(w) && conditionText(question).includes('not ' + w)).sort().map(w => 'not ' + w);
+        const intent = anchors.some(a => a.kind === 'route_path') || httpMethods.length && ['route', 'endpoint'].some(w => words.has(w)) ? 'route' : conditions.length || [...errorWords].some(w => words.has(w)) ? 'error' : anchors.some(a => a.kind === 'symbol') ? 'symbol' : 'lexical';
+        const contentWords = [...expansions].filter(w => !retrievalStopwords.has(w) && !errorWords.has(w) && !negativeConditions.has(w));
+        const N = data.records.length;
+        const hits = [];
+        for (const record of data.records) {
+            const counts = queryCounts.get(record.id);
+            const length = [...counts.values()].reduce((a, b) => a + b, 0);
+            let lexical = 0;
+            for (const word of expansions) {
+                const tf = counts.get(word) || 0;
+                if (!tf)
+                    continue;
+                const df = documentFrequency.get(word) || 0;
+                lexical += Math.log(1 + (N - df + .5) / (df + .5)) * tf / (tf + 1.2 * (.25 + .75 * length / averageLength));
+            }
+            if (lexical <= 0 && record.id !== question)
+                continue;
+            let score = lexical + (record.id === question ? 100 : 0);
+            const signals = lexical > 0 ? ['lexical'] : [];
+            if (record.id === question)
+                signals.push('record_id');
+            const normalizedBody = normalized(record.title + ' ' + record.body);
+            const literalBody = record.body.normalize('NFKC').toLocaleLowerCase();
+            let phrases = 0, routeRegistered = false;
+            for (const anchor of anchors) {
+                let matched = false;
+                if (anchor.kind === 'phrase' || anchor.kind === 'quoted_phrase')
+                    matched = (' ' + normalizedBody + ' ').includes(' ' + anchor.value + ' ');
+                else if (anchor.kind === 'route_path')
+                    matched = literalBody.includes(anchor.value);
+                else
+                    matched = literalBody.includes(anchor.value) || record.title.toLocaleLowerCase() === anchor.value;
+                if (!matched)
+                    continue;
+                if (anchor.kind === 'phrase' && phrases++ >= 3)
+                    continue;
+                score += anchor.kind === 'route_path' ? 6 : anchor.kind === 'symbol' || anchor.kind === 'quoted_phrase' ? 4 : 2;
+                if (!signals.includes(anchor.kind))
+                    signals.push(anchor.kind);
+                if (anchor.kind === 'route_path') {
+                    const methodSet = httpMethods.length ? httpMethods : [...methods].sort();
+                    const escaped = anchor.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const pattern = new RegExp('(?:\\.|\\b)(?:' + methodSet.join('|') + ')\\s*\\(\\s*["\\x27]' + escaped + '["\\x27]');
+                    routeRegistered = routeRegistered || pattern.test(literalBody);
+                }
+            }
+            if (intent === 'route' && routeRegistered) {
+                score += 6;
+                signals.push('route_registration');
+            }
+            if (normalized(record.title) === normalizedQuestion) {
+                score += 4;
+                signals.push('exact_title');
+            }
+            if (intent === 'error' && contentWords.some(w => tokens(record.body).includes(w))) {
+                if (/\bthrow\b|\braise\b|\b(?:\w*error|exception)\s*\(/.test(literalBody)) {
+                    score += 4;
+                    signals.push('error_site');
+                }
+                if (conditions.some(c => (' ' + conditionText(record.body) + ' ').includes(' ' + c + ' '))) {
+                    score += 2;
+                    signals.push('error_condition');
+                }
+            }
+            hits.push({ record, score, signals });
+        }
+        hits.sort((a, b) => b.score - a.score || a.record.id.localeCompare(b.record.id));
+        return { hits, intent, anchors };
+    }
+    function search(query) { return rankSearch(query).hits.map(hit => hit.record); }
+    function navigate(view) {
+        if (!['home', 'ask', 'explore', 'sources', 'changes'].includes(view))
+            view = 'explore';
+        selectedView = view;
+        document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== view; });
+        document.querySelectorAll('[data-view]').forEach(b => { const active = b.dataset.view === view; b.classList.toggle('active', active); if (active)
+            b.setAttribute('aria-current', 'page');
+        else
+            b.removeAttribute('aria-current'); });
+        if (view === 'explore')
+            requestAnimationFrame(() => map.resize());
+    }
+    document.querySelectorAll('[data-view],[data-go]').forEach(b => b.addEventListener('click', () => navigate(b.dataset.view || b.dataset.go || 'explore')));
+    document.querySelector('.brand')?.addEventListener('click', e => { e.preventDefault(); navigate('explore'); });
+    el('workspace-title').textContent = data.title || 'Your knowledge, connected.';
+    el('customer-name').textContent = data.customer_id || 'PERSONAL WORKSPACE';
+    document.title = `${data.title || 'Knowledge workspace'} · Evidence Workspace`;
+    el('footer-digest').textContent = `SNAPSHOT ${(data.snapshot_digest || '').slice(0, 16)}`;
+    el('snapshot-tag').textContent = connected ? 'CONNECTED WORKSPACE' : 'SOURCE SNAPSHOT';
+    el('connection-label').textContent = connected ? 'CONNECTED WORKSPACE' : 'OFFLINE SNAPSHOT';
+    if (connected) {
+        el('ask-description').textContent = 'Find supporting sources, or show a short extractive response with exact citations. Neither establishes a complete verified answer.';
+        el('answer-submit').hidden = false;
+    }
+    for (const [count, label] of [[data.records.length, 'records to explore'], [data.edges.length, 'typed relationships'], [data.sources.length, 'source snapshots']]) {
+        const stat = node('div', '', 'stat');
+        stat.append(node('strong', count.toLocaleString()), node('span', label));
+        el('home-stats').append(stat);
+    }
+    for (const [id, values] of [['domain-filter', domains], ['kind-filter', [...new Set(data.records.map(r => r.kind || 'record'))].sort()], ['edge-filter', [...new Set(data.edges.map(e => e.type))].sort()]]) {
+        for (const value of values) {
+            const option = node('option', value);
+            option.value = value;
+            el(id).append(option);
+        }
+    }
+    for (const source of data.sources) {
+        const option = node('option', source.path || source.id);
+        option.value = source.id;
+        el('source-filter').append(option);
+    }
+    function locator(record) {
+        const path = record.locator?.path || sources.get(record.source_id)?.path || record.source_id;
+        const from = record.locator?.start_line;
+        return from ? `${path}:${from}${record.locator.end_line && record.locator.end_line !== from ? `–${record.locator.end_line}` : ''}` : path;
+    }
+    function brief(record) { return `${record.title}\nID: ${record.id}\nSource: ${locator(record)}\nSource digest: ${record.source_digest}\nSnapshot: ${data.snapshot_digest}\n\n${record.body}\n\nThis is source context, not independently verified evidence.`; }
+    async function copyText(value) {
+        try {
+            if (!navigator.clipboard?.writeText)
+                throw new Error('Clipboard unavailable');
+            await navigator.clipboard.writeText(value);
+            toast('Context copied with source identity.');
+        }
+        catch {
+            const t = node('textarea');
+            t.value = value;
+            t.setAttribute('aria-label', 'Context to copy');
+            t.style.position = 'fixed';
+            t.style.left = '-10000px';
+            document.body.append(t);
+            t.select();
+            const ok = document.execCommand('copy');
+            t.remove();
+            toast(ok ? 'Context copied with source identity.' : 'Clipboard unavailable. Select text in the evidence panel to copy it.');
+        }
+    }
+    function neighbors(id, depth = 1) {
+        const ids = new Set([id]);
+        let frontier = new Set([id]);
+        const edgeType = el('edge-filter').value;
+        for (let i = 0; i < depth; i++) {
+            const next = new Set();
+            for (const edge of data.edges) {
+                if (edgeType && edge.type !== edgeType)
+                    continue;
+                if (frontier.has(edge.source))
+                    next.add(edge.target);
+                if (frontier.has(edge.target))
+                    next.add(edge.source);
+            }
+            frontier = new Set([...next].filter(n => !ids.has(n)));
+            next.forEach(n => ids.add(n));
+        }
+        return ids;
+    }
+    function renderDetail() {
+        const area = el('record-detail');
+        if (!selected)
+            return;
+        const r = records.get(selected);
+        if (!r)
+            return;
+        area.replaceChildren();
+        area.append(node('span', `${r.kind || 'record'} / ${r.domain || 'General'}`, 'eyebrow'));
+        const title = node('h2', r.title, 'record-title');
+        title.dir = 'auto';
+        area.append(title, node('p', r.id, 'record-id'));
+        const actions = node('div', '', 'button-row');
+        actions.append(button('Copy context', () => void copyText(brief(r))), button(compare.includes(r.id) ? 'Remove comparison' : 'Compare', () => { if (compare.includes(r.id))
+            compare = compare.filter(x => x !== r.id);
+        else if (compare.length < 2)
+            compare.push(r.id);
+        else {
+            compare = [compare[1], r.id];
+        } renderCompare(); renderDetail(); }));
+        area.append(actions);
+        if (!filtered.some(item => item.id === r.id)) {
+            const outside = node('div', 'This record is outside the current map filters.', 'callout');
+            outside.append(button('Show in full map', () => { clearFilters(); map.draw(); renderDetail(); }));
+            area.append(outside);
+        }
+        const source = node('div', '', 'detail-section');
+        source.append(node('h3', 'Source citation'), node('p', locator(r), 'source-path'), node('p', `Digest ${r.source_digest || 'unavailable'}`, 'digest'), node('p', 'Snapshot identity · verify against the original', 'muted'));
+        area.append(source);
+        const content = node('div', '', 'detail-section');
+        content.append(node('h3', 'Source content'));
+        const body = node('p', r.body || 'No text content in this record.', 'record-body');
+        body.dir = 'auto';
+        content.append(body);
+        area.append(content);
+        const relations = data.edges.filter(e => e.source === r.id || e.target === r.id).sort((a, b) => Number(a.type === 'same_source') - Number(b.type === 'same_source') || a.type.localeCompare(b.type));
+        const section = node('div', '', 'detail-section');
+        section.append(node('h3', `Source links · ${relations.length}`));
+        const controls = node('div', '', 'button-row');
+        controls.append(button('Show neighborhood', () => { selectedNeighborhood = r.id; neighborhoodDepth = 1; applyFilters(); toast('Showing one-hop neighborhood within current filters.'); }), button('Expand depth', () => { selectedNeighborhood = r.id; neighborhoodDepth = Math.min(3, neighborhoodDepth + 1); applyFilters(); toast(`Showing ${neighborhoodDepth}-hop neighborhood within current filters.`); }), button('Show all', () => { selectedNeighborhood = null; applyFilters(); }));
+        section.append(controls);
+        if (!relations.length)
+            section.append(node('p', 'No source links were recorded. This does not prove that none exist.', 'muted'));
+        for (const edge of relations.slice(0, 60)) {
+            const outgoing = edge.source === r.id;
+            const other = records.get(outgoing ? edge.target : edge.source);
+            const b = button('', () => { if (other)
+                select(other.id); }, 'edge-button');
+            const kind = edge.provenance?.kind;
+            const standing = edge.standing || edge.provenance?.standing;
+            const otherEntity = symbolicEntities.get(outgoing ? edge.provenance?.target_entity || '' : edge.provenance?.source_entity || '');
+            b.append(node('span', `${outgoing ? '→' : '←'} ${edge.type}${kind ? ` · ${kind.replace(/_/g, ' ')}` : ''}${standing ? ` (${standing})` : ''}`, 'edge-type'), node('span', otherEntity?.qualified_name || other?.title || (outgoing ? edge.target : edge.source)));
+            b.disabled = !other;
+            section.append(b);
+        }
+        if (relations.length > 60)
+            section.append(node('p', `Showing 60 of ${relations.length} relationships. Filter the map by type to narrow the view.`, 'muted'));
+        area.append(section);
+    }
+    function select(id, track = true) {
+        if (!records.has(id))
+            return;
+        selected = id;
+        if (track && history[historyIndex] !== id) {
+            history = history.slice(0, historyIndex + 1);
+            history.push(id);
+            historyIndex = history.length - 1;
+        }
+        el('history-back').disabled = historyIndex <= 0;
+        el('history-forward').disabled = historyIndex >= history.length - 1;
+        renderDetail();
+        renderRecords();
+        map.setRecords(filtered, el('edge-filter').value);
+    }
+    function renderCompare() {
+        el('compare-panel').hidden = compare.length === 0;
+        const area = el('compare-content');
+        area.replaceChildren();
+        for (const id of compare) {
+            const r = records.get(id);
+            const card = node('article', '', 'compare-card');
+            const title = node('h3', r.title);
+            title.dir = 'auto';
+            const body = node('p', r.body);
+            body.dir = 'auto';
+            card.append(title, node('span', `${r.kind} · ${r.domain}`, 'eyebrow'), node('div', locator(r), 'source-path'), body, button('Inspect record', () => select(id)));
+            area.append(card);
+        }
+        if (compare.length === 1)
+            area.append(node('p', 'Choose Compare on another record to inspect them side by side. Similar text does not establish equivalence.', 'callout'));
+    }
+    el('clear-compare').addEventListener('click', () => { compare = []; renderCompare(); renderDetail(); });
+    function renderRecords() {
+        const list = el('record-list');
+        const focusedId = document.activeElement instanceof HTMLElement ? document.activeElement.dataset.recordId : undefined;
+        list.replaceChildren();
+        el('record-count').textContent = `${filtered.length.toLocaleString()} matching / ${data.records.length.toLocaleString()} total`;
+        for (const r of filtered.slice(0, recordLimit)) {
+            const wrapper = node('div');
+            wrapper.setAttribute('role', 'listitem');
+            const b = button('', () => select(r.id), `record-item${r.id === selected ? ' selected' : ''}`);
+            b.setAttribute('aria-pressed', String(r.id === selected));
+            b.dataset.recordId = r.id;
+            const dot = node('span', '', 'kind-dot');
+            dot.style.background = colorCSS(r);
+            dot.setAttribute('aria-hidden', 'true');
+            const text = node('span');
+            const name = node('span', r.title, 'record-name');
+            name.dir = 'auto';
+            text.append(name, node('small', locator(r)));
+            b.append(dot, text, node('span', r.kind || 'record', 'tag'));
+            wrapper.append(b);
+            list.append(wrapper);
+            if (focusedId === r.id)
+                b.focus({ preventScroll: true });
+        }
+        if (!filtered.length)
+            list.append(node('p', 'No matching records. Try a different term or clear the filters.', 'muted'));
+        el('show-more').hidden = filtered.length <= recordLimit;
+        if (filtered.length > recordLimit)
+            el('show-more').textContent = `Show 100 more (${recordLimit} of ${filtered.length} listed)`;
+    }
+    function applyFilters() {
+        const domain = el('domain-filter').value;
+        const kind = el('kind-filter').value;
+        const source = el('source-filter').value;
+        const type = el('edge-filter').value;
+        const attached = type ? new Set(data.edges.filter(e => e.type === type).flatMap(e => [e.source, e.target])) : null;
+        const hood = selectedNeighborhood ? neighbors(selectedNeighborhood, neighborhoodDepth) : null;
+        filtered = search(el('search').value).filter(r => (!domain || (r.domain || 'General') === domain) && (!kind || (r.kind || 'record') === kind) && (!source || r.source_id === source) && (!attached || attached.has(r.id)) && (!hood || hood.has(r.id)));
+        recordLimit = 100;
+        renderRecords();
+        map.setRecords(filtered, type);
+        el('map-empty').hidden = filtered.length !== 0;
+    }
+    function clearFilters() { for (const id of ['search', 'domain-filter', 'kind-filter', 'source-filter', 'edge-filter'])
+        el(id).value = ''; selectedNeighborhood = null; applyFilters(); }
+    el('filter-form').addEventListener('submit', e => e.preventDefault());
+    el('search').addEventListener('input', applyFilters);
+    for (const id of ['domain-filter', 'kind-filter', 'source-filter', 'edge-filter'])
+        el(id).addEventListener('change', applyFilters);
+    el('clear-filters').addEventListener('click', clearFilters);
+    el('empty-clear').addEventListener('click', clearFilters);
+    el('show-more').addEventListener('click', () => { recordLimit += 100; renderRecords(); });
+    el('history-back').addEventListener('click', () => { if (historyIndex > 0)
+        select(history[--historyIndex], false); });
+    el('history-forward').addEventListener('click', () => { if (historyIndex < history.length - 1)
+        select(history[++historyIndex], false); });
+    // The camera transforms deterministic 3D coordinates; WebGL renders projected points
+    // and typed edges. No continuous animation, physics loop, textures, or remote assets.
+    class SpatialMap {
+        constructor() {
+            this.canvas = el('spatial-canvas');
+            this.flatCanvas = el('flat-canvas');
+            this.gl = null;
+            this.ctx = null;
+            this.program = null;
+            this.buffer = null;
+            this.pointUniform = null;
+            this.points = [];
+            this.edges = [];
+            this.width = 1;
+            this.height = 1;
+            this.flat = false;
+            this.yaw = -.55;
+            this.pitch = .5;
+            this.zoom = 1;
+            this.panX = 0;
+            this.panY = 0;
+            this.fallbackReason = '';
+            this.down = null;
+            try {
+                this.gl = this.canvas.getContext('webgl2', { alpha: true, antialias: true });
+                if (this.gl)
+                    this.initializeGL(this.gl);
+                else
+                    this.fallbackReason = 'WebGL2 unavailable';
+            }
+            catch (error) {
+                this.gl = null;
+                this.fallbackReason = error instanceof Error ? error.message : 'Graphics initialization failed';
+            }
+            try {
+                this.ctx = this.flatCanvas.getContext('2d');
+            }
+            catch {
+                this.ctx = null;
+            }
+            if (!this.gl)
+                this.flat = true;
+            this.canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); this.gl = null; this.flat = true; this.down = null; this.fallbackReason = 'Graphics context lost'; this.updateMode(); toast('Graphics context unavailable. Use the 2D map and record list.'); });
+            for (const canvas of [this.canvas, this.flatCanvas]) {
+                canvas.addEventListener('pointerdown', e => { if (e.button !== 0)
+                    return; this.down = { x: e.clientX, y: e.clientY, px: e.clientX, py: e.clientY, moved: false, pan: e.shiftKey || this.flat, pointer: e.pointerId }; canvas.setPointerCapture(e.pointerId); });
+                canvas.addEventListener('pointermove', e => { if (!this.down || this.down.pointer !== e.pointerId)
+                    return; const dx = e.clientX - this.down.px, dy = e.clientY - this.down.py; if (Math.hypot(e.clientX - this.down.x, e.clientY - this.down.y) > 4)
+                    this.down.moved = true; if (this.down.pan) {
+                    this.panX += dx;
+                    this.panY += dy;
+                }
+                else {
+                    this.yaw += dx * .006;
+                    this.pitch = Math.max(-1.3, Math.min(1.3, this.pitch + dy * .006));
+                } this.down.px = e.clientX; this.down.py = e.clientY; this.draw(); });
+                canvas.addEventListener('pointerup', e => { if (!this.down || this.down.pointer !== e.pointerId)
+                    return; const moved = this.down.moved; this.down = null; if (canvas.hasPointerCapture(e.pointerId))
+                    canvas.releasePointerCapture(e.pointerId); if (!moved) {
+                    const rect = canvas.getBoundingClientRect();
+                    this.pick(e.clientX - rect.left, e.clientY - rect.top);
+                } });
+                canvas.addEventListener('pointercancel', () => { this.down = null; });
+                canvas.addEventListener('wheel', e => { e.preventDefault(); this.zoom = Math.max(.3, Math.min(4, this.zoom * Math.exp(-e.deltaY * .001))); this.draw(); }, { passive: false });
+            }
+            new ResizeObserver(() => this.resize()).observe(this.canvas.parentElement);
+            el('mode-toggle').addEventListener('click', () => { if (this.flat && !this.gl) {
+                toast(`3D unavailable: ${this.fallbackReason || 'Graphics unavailable'}. Use ${this.ctx ? 'the 2D map or ' : ''}the record list.`);
+                return;
+            } this.flat = !this.flat; this.updateMode(); });
+            el('zoom-in').addEventListener('click', () => { this.zoom = Math.min(4, this.zoom * 1.2); this.draw(); });
+            el('zoom-out').addEventListener('click', () => { this.zoom = Math.max(.3, this.zoom / 1.2); this.draw(); });
+            el('rotate-left').addEventListener('click', () => { this.yaw -= .25; this.draw(); });
+            el('rotate-right').addEventListener('click', () => { this.yaw += .25; this.draw(); });
+            el('reset-map').addEventListener('click', () => this.reset());
+            el('fit-selected').addEventListener('click', () => { if (!selected) {
+                toast('Select a record first.');
+                return;
+            } selectedNeighborhood = selected; neighborhoodDepth = 1; applyFilters(); this.reset(); });
+            this.updateMode();
+        }
+        initializeGL(gl) {
+            const compile = (type, source) => { const shader = gl.createShader(type); if (!shader)
+                throw new Error('Shader allocation failed'); gl.shaderSource(shader, source); gl.compileShader(shader); if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                gl.deleteShader(shader);
+                throw new Error('Shader compilation failed');
+            } return shader; };
+            // Keep the GLSL version directive on its own line.
+            const vertex = compile(gl.VERTEX_SHADER, `#version 300 es
+in vec2 a_position;
+in vec3 a_color;
+in float a_size;
+in float a_alpha;
+out vec3 v_color;
+out float v_alpha;
+void main(){gl_Position=vec4(a_position,0.,1.);gl_PointSize=a_size;v_color=a_color;v_alpha=a_alpha;}`);
+            const fragment = compile(gl.FRAGMENT_SHADER, `#version 300 es
+precision mediump float;
+in vec3 v_color;
+in float v_alpha;
+uniform bool u_point;
+out vec4 outColor;
+void main(){
+  float alpha=v_alpha;
+  vec3 color=v_color;
+  if(u_point){
+    vec2 offset=gl_PointCoord-vec2(.5);
+    float d=length(offset);
+    if(d>.5)discard;
+    alpha*=1.-smoothstep(.35,.5,d);
+    float highlight=max(0.,1.-length(offset+vec2(.13,.16))*2.5);
+    color=color*(.6+.4*sqrt(max(0.,1.-4.*d*d)))+vec3(.18)*highlight;
+  }
+  outColor=vec4(color,alpha);
+}`);
+            const program = gl.createProgram();
+            if (!program)
+                throw new Error('Program allocation failed');
+            gl.attachShader(program, vertex);
+            gl.attachShader(program, fragment);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+                throw new Error('Shader link failed');
+            gl.deleteShader(vertex);
+            gl.deleteShader(fragment);
+            const buffer = gl.createBuffer();
+            if (!buffer)
+                throw new Error('Graphics buffer allocation failed');
+            gl.useProgram(program);
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            for (const [name, count, offset] of [['a_position', 2, 0], ['a_color', 3, 8], ['a_size', 1, 20], ['a_alpha', 1, 24]]) {
+                const at = gl.getAttribLocation(program, name);
+                if (at < 0)
+                    throw new Error('Graphics attribute unavailable');
+                gl.enableVertexAttribArray(at);
+                gl.vertexAttribPointer(at, count, gl.FLOAT, false, 28, offset);
+            }
+            const pointUniform = gl.getUniformLocation(program, 'u_point');
+            if (pointUniform === null)
+                throw new Error('Graphics uniform unavailable');
+            gl.enable(gl.BLEND);
+            gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+            if (gl.getError() !== gl.NO_ERROR)
+                throw new Error('Graphics initialization failed');
+            this.program = program;
+            this.buffer = buffer;
+            this.pointUniform = pointUniform;
+        }
+        updateMode() {
+            const mapUnavailable = this.flat && !this.ctx;
+            this.canvas.hidden = this.flat;
+            this.flatCanvas.hidden = !this.flat || mapUnavailable;
+            this.canvas.parentElement.classList.toggle('is-planar', this.flat);
+            el('map-mode-label').textContent = mapUnavailable ? 'LIST VIEW' : this.flat ? (this.fallbackReason ? '2D FALLBACK' : '2D PLANAR MAP') : '3D SPATIAL MAP';
+            el('mode-toggle').textContent = this.gl ? (this.flat ? 'Use 3D view' : 'Use 2D view') : '3D unavailable';
+            el('mode-toggle').setAttribute('aria-pressed', String(this.flat));
+            el('map-interaction-hint').textContent = this.flat ? 'Drag to pan · Scroll to zoom' : 'Drag to orbit · Shift-drag to pan';
+            el('map-depth-key').hidden = this.flat;
+            el('motion-label').textContent = mapUnavailable ? 'Map unavailable · use record list' : this.fallbackReason ? `2D fallback · ${this.fallbackReason}` : window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'Layout only · no automatic movement' : 'Positions and depth are layout only';
+            const status = el('map-renderer-status');
+            status.hidden = !this.fallbackReason && !mapUnavailable;
+            status.textContent = mapUnavailable ? 'Map rendering unavailable. Use the record list to inspect every record and its sources.' : `3D unavailable: ${this.fallbackReason}. The 2D map and record list remain available.`;
+            el('rotate-left').disabled = this.flat;
+            el('rotate-right').disabled = this.flat;
+            this.resize();
+        }
+        reset() { this.yaw = -.55; this.pitch = .5; this.zoom = 1; this.panX = 0; this.panY = 0; this.draw(); }
+        setRecords(input, edgeType) {
+            const chosen = new Map();
+            const byId = new Map(input.map(r => [r.id, r]));
+            if (selected && byId.has(selected)) {
+                chosen.set(selected, byId.get(selected));
+                const related = data.edges.filter(e => e.type !== 'same_source' && (e.source === selected || e.target === selected));
+                for (const edge of related.slice(0, 16)) {
+                    const other = byId.get(edge.source === selected ? edge.target : edge.source);
+                    if (other)
+                        chosen.set(other.id, other);
+                }
+            }
+            for (const record of input) {
+                if (chosen.size >= 200)
+                    break;
+                chosen.set(record.id, record);
+            }
+            const visible = [...chosen.values()];
+            const ids = new Set(visible.map(r => r.id));
+            const eligible = data.edges.filter(e => ids.has(e.source) && ids.has(e.target) && (!edgeType || e.type === edgeType)).sort((a, b) => Number(a.type === 'same_source') - Number(b.type === 'same_source') || a.id.localeCompare(b.id));
+            this.edges = eligible.slice(0, 400);
+            this.points = visible.map(record => { const h = hash(record.id); const group = Math.max(0, domains.indexOf(record.domain || 'General')); const angle = (group / Math.max(1, domains.length)) * Math.PI * 2; const spread = domains.length > 1 ? .47 : 0; const theta = (h % 10007) / 10007 * Math.PI * 2; const radius = .12 + ((h >>> 12) % 997) / 997 * .53; return { record, x: Math.cos(angle) * spread + Math.cos(theta) * radius, y: Math.sin(angle) * spread + Math.sin(theta) * radius, z: (((h >>> 4) % 503) / 503 - .5) * 1.7, sx: 0, sy: 0, scale: 1, depth: 0 }; });
+            el('map-count').textContent = `${visible.length}/${input.length} nodes · ${this.edges.length}/${eligible.length} edges`;
+            this.draw();
+        }
+        resize() { if (selectedView !== 'explore')
+            return; const rect = this.canvas.parentElement.getBoundingClientRect(); this.width = Math.max(1, rect.width); this.height = Math.max(1, rect.height); const dpr = Math.min(window.devicePixelRatio || 1, 2); for (const c of [this.canvas, this.flatCanvas]) {
+            c.width = Math.round(this.width * dpr);
+            c.height = Math.round(this.height * dpr);
+        } this.draw(); }
+        projectPosition(x, y, z) {
+            if (!this.flat) {
+                const rx = x * Math.cos(this.yaw) + z * Math.sin(this.yaw);
+                z = -x * Math.sin(this.yaw) + z * Math.cos(this.yaw);
+                x = rx;
+                const ry = y * Math.cos(this.pitch) - z * Math.sin(this.pitch);
+                z = y * Math.sin(this.pitch) + z * Math.cos(this.pitch);
+                y = ry;
+            }
+            const scale = this.flat ? 1 : 2.6 / (2.6 + z);
+            const size = Math.min(this.width * .39, this.height * (this.flat ? .38 : .32)) * this.zoom;
+            return { sx: this.width / 2 + x * size * scale + this.panX, sy: this.height * (this.flat ? .5 : .44) + y * size * scale + this.panY, scale, depth: z };
+        }
+        project() { for (const p of this.points)
+            Object.assign(p, this.projectPosition(p.x, p.y, p.z)); }
+        draw() {
+            if (selectedView !== 'explore')
+                return;
+            this.project();
+            const byId = new Map(this.points.map(p => [p.record.id, p]));
+            if (this.flat) {
+                const ctx = this.ctx;
+                if (!ctx)
+                    return;
+                const dpr = this.flatCanvas.width / this.width;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                ctx.clearRect(0, 0, this.width, this.height);
+                for (const e of this.edges) {
+                    const a = byId.get(e.source), b = byId.get(e.target);
+                    ctx.beginPath();
+                    ctx.moveTo(a.sx, a.sy);
+                    ctx.lineTo(b.sx, b.sy);
+                    ctx.strokeStyle = e.source === selected || e.target === selected ? '#6ce8dcaa' : '#7289ac44';
+                    ctx.lineWidth = e.source === selected || e.target === selected ? 1.4 : .7;
+                    ctx.stroke();
+                }
+                for (const p of this.points) {
+                    ctx.beginPath();
+                    ctx.arc(p.sx, p.sy, p.record.id === selected ? 8 : 4.5, 0, Math.PI * 2);
+                    ctx.fillStyle = colorCSS(p.record);
+                    ctx.fill();
+                    if (p.record.id === selected) {
+                        ctx.beginPath();
+                        ctx.arc(p.sx, p.sy, 12, 0, Math.PI * 2);
+                        ctx.strokeStyle = colorCSS(p.record);
+                        ctx.stroke();
+                    }
+                }
+            }
+            else if (this.gl && this.program) {
+                const gl = this.gl;
+                gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+                gl.clearColor(0, 0, 0, 0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.useProgram(this.program);
+                gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+                const packed = [];
+                const put = (p, c, size, alpha) => { packed.push(p.sx / this.width * 2 - 1, 1 - p.sy / this.height * 2, ...c, size, alpha); };
+                const light = document.body.classList.contains('light');
+                const guideColor = light ? [.28, .42, .56] : [.43, .61, .75];
+                // A reference floor uses the same camera as the graph. Guides are layout,
+                // never records or relationships, and are kept outside the edge count.
+                for (let i = -5; i <= 5; i++) {
+                    const t = i / 5;
+                    for (const ends of [[[t, 1.08, -1], [t, 1.08, 1]], [[-1, 1.08, t], [1, 1.08, t]]]) {
+                        const a = this.projectPosition(...ends[0]), b = this.projectPosition(...ends[1]);
+                        put(a, guideColor, 1, i === 0 ? .4 : .2);
+                        put(b, guideColor, 1, i === 0 ? .4 : .2);
+                    }
+                }
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(packed), gl.DYNAMIC_DRAW);
+                gl.uniform1i(this.pointUniform, 0);
+                gl.drawArrays(gl.LINES, 0, packed.length / 7);
+                packed.length = 0;
+                for (const e of this.edges) {
+                    const a = byId.get(e.source), b = byId.get(e.target);
+                    const active = e.source === selected || e.target === selected;
+                    const c = active ? (light ? [0, .4, .37] : [.43, .91, .86]) : guideColor;
+                    const alpha = active ? .8 : Math.max(.12, Math.min(.4, .25 * (a.scale + b.scale) / 2));
+                    put(a, c, 1, alpha);
+                    put(b, c, 1, alpha);
+                }
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(packed), gl.DYNAMIC_DRAW);
+                gl.drawArrays(gl.LINES, 0, packed.length / 7);
+                packed.length = 0;
+                const dpr = this.canvas.width / this.width;
+                for (const p of [...this.points].sort((a, b) => b.depth - a.depth)) {
+                    const c = kindColor(p.record);
+                    const active = p.record.id === selected;
+                    const alpha = active ? 1 : Math.max(.4, Math.min(1, .4 + (p.scale - .65) * .75));
+                    put(p, active ? (light ? [0, .42, .38] : [.9, 1, 1]) : c, (active ? 23 : 14) * p.scale * dpr, alpha);
+                }
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(packed), gl.DYNAMIC_DRAW);
+                gl.uniform1i(this.pointUniform, 1);
+                gl.drawArrays(gl.POINTS, 0, packed.length / 7);
+                if (gl.getError() !== gl.NO_ERROR) {
+                    this.gl = null;
+                    this.flat = true;
+                    this.fallbackReason = 'Graphics rendering failed';
+                    this.updateMode();
+                    return;
+                }
+            }
+            const label = el('map-label');
+            const p = selected ? byId.get(selected) : null;
+            label.hidden = !p;
+            if (p) {
+                label.textContent = p.record.title;
+                label.dir = 'auto';
+                label.style.left = `${Math.max(8, Math.min(this.width - 195, p.sx + 12))}px`;
+                label.style.top = `${Math.max(40, Math.min(this.height - 82, p.sy - 20))}px`;
+            }
+        }
+        pick(x, y) { let best; let distance = 20; for (const p of this.points) {
+            const d = Math.hypot(p.sx - x, p.sy - y);
+            if (d < distance) {
+                best = p;
+                distance = d;
+            }
+        } if (best)
+            select(best.record.id); }
+    }
+    const map = new SpatialMap();
+    applyFilters();
+    for (const domain of domains) {
+        const b = button('', () => { el('domain-filter').value = el('domain-filter').value === domain ? '' : domain; applyFilters(); });
+        const dot = node('span', '', 'kind-dot');
+        dot.style.background = `rgb(${palette[hash(domain) % palette.length].map(c => Math.round(c * 255)).join(',')})`;
+        dot.setAttribute('aria-hidden', 'true');
+        b.append(dot, node('span', domain));
+        el('map-legend').append(b);
+    }
+    el('help-toggle').addEventListener('click', () => { const p = el('help-panel'); p.hidden = !p.hidden; el('help-toggle').setAttribute('aria-expanded', String(!p.hidden)); });
+    const themeButton = el('theme-toggle');
+    function theme(light) { document.body.classList.toggle('light', light); themeButton.textContent = light ? 'Switch to dark theme' : 'Switch to light theme'; map.draw(); }
+    theme(readPreference('atlas-theme') === 'light');
+    themeButton.addEventListener('click', () => { const light = !document.body.classList.contains('light'); theme(light); writePreference('atlas-theme', light ? 'light' : 'dark'); });
+    el('print-view').addEventListener('click', () => window.print());
+    el('restore-view').disabled = !readPreference(viewKey);
+    el('save-view').addEventListener('click', () => {
+        const filters = Object.fromEntries(['search', 'domain-filter', 'kind-filter', 'source-filter', 'edge-filter'].map(id => [id, el(id).value]));
+        const ok = writePreference(viewKey, JSON.stringify({ filters, selected, yaw: map.yaw, pitch: map.pitch, zoom: map.zoom, panX: map.panX, panY: map.panY, flat: map.flat, selectedNeighborhood, neighborhoodDepth }));
+        el('restore-view').disabled = !ok;
+        toast(ok ? 'View saved in this browser for this snapshot.' : 'Browser storage unavailable. This view could not be saved.');
+    });
+    el('restore-view').addEventListener('click', () => {
+        try {
+            const raw = readPreference(viewKey);
+            if (!raw)
+                return;
+            const saved = JSON.parse(raw);
+            for (const id of ['search', 'domain-filter', 'kind-filter', 'source-filter', 'edge-filter'])
+                if (typeof saved.filters?.[id] === 'string')
+                    el(id).value = saved.filters[id];
+            selectedNeighborhood = records.has(saved.selectedNeighborhood) ? saved.selectedNeighborhood : null;
+            neighborhoodDepth = [1, 2, 3].includes(saved.neighborhoodDepth) ? saved.neighborhoodDepth : 1;
+            applyFilters();
+            for (const key of ['yaw', 'pitch', 'zoom', 'panX', 'panY'])
+                if (typeof saved[key] === 'number' && Number.isFinite(saved[key]))
+                    map[key] = saved[key];
+            map.zoom = Math.max(.3, Math.min(4, map.zoom));
+            map.flat = !map.gl || saved.flat === true;
+            map.updateMode();
+            if (records.has(saved.selected))
+                select(saved.selected);
+            toast('Saved view restored.');
+        }
+        catch {
+            toast('This saved view could not be restored.');
+        }
+    });
+    for (const source of data.sources) {
+        const card = node('article', '', 'source-card');
+        card.append(node('h3', source.path || source.id), node('span', source.kind || 'source', 'eyebrow'), node('p', `Source ID: ${source.id}`, 'digest'), node('p', `Digest: ${source.digest}`, 'digest'), node('span', `${data.records.filter(r => r.source_id === source.id).length} records · captured in this snapshot`, 'muted'), button('Explore these records', () => { clearFilters(); el('source-filter').value = source.id; applyFilters(); navigate('explore'); }));
+        el('source-list').append(card);
+    }
+    if (!data.sources.length)
+        el('source-list').append(node('p', 'This snapshot contains no source inventory.', 'callout'));
+    for (const key of ['added', 'modified', 'removed']) {
+        const entries = data.changes[key] || [];
+        const group = node('section', '', 'change-group');
+        group.append(node('h3', `${key[0].toUpperCase() + key.slice(1)} · ${entries.length}`));
+        if (!entries.length)
+            group.append(node('p', 'No entries reported for this comparison.', 'muted'));
+        else {
+            const list = node('ul');
+            for (const entry of entries) {
+                const li = node('li');
+                const id = typeof entry === 'string' ? entry : JSON.stringify(entry);
+                if (records.has(id))
+                    li.append(button(records.get(id).title, () => { navigate('explore'); select(id); }));
+                else
+                    li.textContent = id;
+                list.append(li);
+            }
+            group.append(list);
+        }
+        el('changes-list').append(group);
+    }
+    const firstSource = new URLSearchParams(location.hash.slice(1)).get('record');
+    if (firstSource && records.has(firstSource))
+        select(firstSource);
+    function excerpt(r, question) {
+        const text = r.body;
+        const folded = text.toLocaleLowerCase();
+        const ignored = new Set(['what', 'which', 'where', 'when', 'why', 'how', 'does', 'happens', 'happen', 'that', 'this', 'from', 'with', 'about', 'into', 'then', 'have', 'there', 'their', 'would', 'should', 'could']);
+        const terms = tokens(question).filter(t => t.length >= 3 && !ignored.has(t));
+        const route = question.match(/\/[\p{L}\p{N}_./:-]+/u)?.[0].toLocaleLowerCase();
+        const candidates = new Set();
+        for (const term of [...terms, ...(route ? [route] : [])]) {
+            let pos = folded.indexOf(term);
+            while (pos >= 0) {
+                candidates.add(pos);
+                pos = folded.indexOf(term, pos + term.length);
+            }
+        }
+        let best = 0, bestScore = -1;
+        for (const position of candidates) {
+            const start = Math.max(0, position - 110);
+            const window = folded.slice(start, start + 650);
+            const score = terms.reduce((sum, term) => sum + (window.includes(term) ? Math.min(term.length, 12) : 0), 0) + (route && window.includes(route) ? 24 : 0);
+            if (score > bestScore) {
+                bestScore = score;
+                best = start;
+            }
+        }
+        return `${best ? '…' : ''}${text.slice(best, best + 650)}${text.length > best + 650 ? '…' : ''}`;
+    }
+    function sourceCard(r, question, reason, focus) { const card = node('article', '', 'answer-card'); card.dataset.recordId = r.id; const title = node('h3', r.title); title.dir = 'auto'; const body = node('p', excerpt(r, question)); body.dir = 'auto'; card.append(title, body, node('div', locator(r), 'source-path')); const focusLocator = focus?.locator; if (focus && focusLocator && focus.source_digest === r.source_digest && focusLocator.path === r.locator.path && typeof focus.excerpt === 'string') {
+        card.append(node('p', `Focused line ${focusLocator.start_line || '?'} · orientation within the cited passage`, 'muted'), node('pre', focus.excerpt, 'record-body'));
+    } if (reason)
+        card.append(node('p', reason, 'muted')); const actions = node('div', '', 'button-row'); actions.append(button('Inspect evidence', () => { const embedded = records.get(r.id); if (!embedded || embedded.source_digest !== r.source_digest) {
+        toast('This result uses a newer source version. Reload the workspace before inspecting its graph.');
+        return;
+    } navigate('explore'); select(r.id); }), button('Copy with citation', () => void copyText(brief(r)))); card.append(actions); return card; }
+    function appendContext(results, context) {
+        if (!context || typeof context !== 'object')
+            return;
+        const bundle = context;
+        const links = Array.isArray(bundle.links) ? bundle.links : [];
+        const gaps = Array.isArray(bundle.gaps) ? bundle.gaps : [];
+        const details = node('details', '', 'detail-section');
+        const summary = node('summary', `Context and open gaps · ${links.length} source links`);
+        details.append(summary);
+        if (typeof bundle.freshness === 'string')
+            details.append(node('p', `Freshness: ${bundle.freshness}`, 'muted'));
+        for (const item of links.slice(0, 8)) {
+            if (!item || typeof item !== 'object')
+                continue;
+            const link = item;
+            const from = link.source ? records.get(link.source) : undefined;
+            const to = link.target ? records.get(link.target) : undefined;
+            const site = link.sites?.[0]?.locator;
+            const fromName = symbolicEntities.get(link.source_entity || '')?.qualified_name || from?.title || link.source || '?';
+            const toName = symbolicEntities.get(link.target_entity || '')?.qualified_name || to?.title || link.target || '?';
+            const label = `${link.kind || 'declared'} (${link.standing || 'unreported'}): ${fromName} → ${toName}${site?.path ? ` · ${site.path}:${site.start_line || '?'}` : ''}`;
+            details.append(node('p', label, 'muted'));
+        }
+        for (const gap of gaps.slice(0, 5))
+            if (typeof gap === 'string')
+                details.append(node('p', `Gap: ${gap}`, 'muted'));
+        results.append(details);
+    }
+    el('ask-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const question = el('question').value.trim();
+        if (!question)
+            return;
+        const results = el('ask-results');
+        results.replaceChildren();
+        const submit = el('ask-submit');
+        const answerButton = el('answer-submit');
+        submit.disabled = true;
+        answerButton.disabled = true;
+        const citedResponse = e.submitter === answerButton;
+        try {
+            if (connected) {
+                if (!sessionRole) {
+                    await loadSession();
+                    if (!sessionRole)
+                        throw new Error('Sign in above to query the private workspace.');
+                }
+                const response = await fetch(citedResponse ? '/api/answer' : '/api/query', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken }, body: JSON.stringify(citedResponse ? { question } : { question, mode: 'find' }) });
+                if (response.status === 401 || response.status === 403) {
+                    await loadSession();
+                    throw new Error('Workspace access expired or was refused. Sign in and try again.');
+                }
+                if (!response.ok)
+                    throw new Error(`Query failed (${response.status}).`);
+                const result = await response.json();
+                if (citedResponse) {
+                    results.append(node('div', `Status: ${String(result.status || 'unreported')} · extractive document response.`, 'callout'));
+                    if (typeof result.message === 'string')
+                        results.append(node('p', result.message));
+                    const claims = Array.isArray(result.claims) ? result.claims : [];
+                    const receipt = result.receipt && typeof result.receipt === 'object' ? result.receipt : null;
+                    const selections = receipt && Array.isArray(receipt.selection) ? receipt.selection : [];
+                    for (const claim of claims) {
+                        if (!claim || typeof claim.text !== 'string')
+                            continue;
+                        const citation = claim.citation?.locator;
+                        const card = node('article', '', 'source-card');
+                        card.append(node('h3', `Excerpt ${claim.number || ''} · ${citation?.path || 'source'}:${citation?.start_line || '?'}–${citation?.end_line || '?'}`));
+                        card.append(node('pre', claim.text, 'record-body'));
+                        const selection = selections.find((item) => item?.number === claim.number);
+                        const signals = selection?.signals;
+                        if (signals) {
+                            const terms = Array.isArray(signals.topic_terms) ? signals.topic_terms.join(', ') : '';
+                            card.append(node('p', `Matched by: ${terms ? `terms ${terms}` : 'section intent'}${signals.heading_hint ? ` · section ${signals.heading_hint}` : ''}. Ranking reasons are not proof.`, 'muted'));
+                        }
+                        card.append(node('p', `Source digest: ${String(claim.citation?.source_digest || 'unreported')} · excerpt digest: ${String(claim.citation?.excerpt_digest || 'unreported')}`, 'digest'));
+                        results.append(card);
+                    }
+                    if (receipt) {
+                        results.append(node('p', `Route: ${String(receipt.route_reason || 'document reading')} · snapshot: ${String(result.snapshot_digest || 'unreported').slice(0, 16)} · freshness: ${String(result.freshness || 'unreported')}`, 'muted'));
+                        const gaps = Array.isArray(receipt.gaps) ? receipt.gaps : [];
+                        for (const gap of gaps.slice(0, 4))
+                            if (typeof gap === 'string')
+                                results.append(node('p', `Limit: ${gap}`, 'muted'));
+                    }
+                    if (!claims.length)
+                        results.append(node('p', 'No cited response was produced. Inspect supporting sources or revise the question.', 'callout'));
+                    return;
+                }
+                results.append(node('div', `Status: ${String(result.status || 'unreported')} · connected retrieval. Inspect cited evidence.`, 'callout'));
+                if (typeof result.message === 'string') {
+                    const p = node('p', result.message);
+                    p.dir = 'auto';
+                    results.append(p);
+                }
+                if (typeof result.answer === 'string') {
+                    const p = node('p', result.answer);
+                    p.dir = 'auto';
+                    results.append(p);
+                }
+                const items = Array.isArray(result.items) ? result.items : [];
+                const receipt = result.retrieval && typeof result.retrieval === 'object' ? result.retrieval : null;
+                const matches = receipt && Array.isArray(receipt.matches) ? receipt.matches : [];
+                if (receipt) {
+                    const intent = typeof receipt.intent === 'string' ? receipt.intent : 'source search';
+                    const anchors = Array.isArray(receipt.anchors) ? receipt.anchors.filter((a) => a && typeof a === 'object' && typeof a.value === 'string').map((a) => a.value).slice(0, 5) : [];
+                    results.append(node('p', `Retrieval: ${intent}${anchors.length ? ` · anchors: ${anchors.join(', ')}` : ''}. Match signals are ranking reasons, not proof.`, 'muted'));
+                }
+                let displayed = 0;
+                for (const item of items) {
+                    if (item && typeof item.id === 'string' && typeof item.title === 'string' && typeof item.body === 'string') {
+                        const match = matches.find((m) => m && m.record_id === item.id);
+                        const signals = match && Array.isArray(match.signals) ? match.signals.filter((s) => typeof s === 'string').slice(0, 5) : [];
+                        const focus = result.context_bundle?.primary?.find((p) => p.record_id === item.id)?.focus;
+                        results.append(sourceCard(item, question, signals.length ? `Matched by: ${signals.join(', ')}` : undefined, focus));
+                        displayed++;
+                    }
+                }
+                appendContext(results, result.context_bundle);
+                if (!displayed)
+                    results.append(node('p', 'No source passages were returned. Do not treat this as a supported answer.', 'callout'));
+                if (result.choices)
+                    results.append(node('p', `Clarification needed: ${JSON.stringify(result.choices)}`, 'muted'));
+                if (result.snapshot_digest && result.snapshot_digest !== data.snapshot_digest)
+                    results.append(node('p', 'The backend is using a different snapshot. Reload the workspace to update the map and source inventory.', 'callout'));
+                if (result.limitations)
+                    results.append(node('p', Array.isArray(result.limitations) ? result.limitations.join(' · ') : String(result.limitations), 'muted'));
+            }
+            else {
+                const ranking = rankSearch(question);
+                const matched = ranking.hits;
+                const aliases = Object.entries(data.aliases).filter(([alias, canonical]) => canonical.length > 1 && normalized(question).includes(normalized(alias)));
+                if (aliases.length)
+                    results.append(node('div', `Ambiguous vocabulary: ${aliases.map(([alias, values]) => `${alias} → ${values.join(' / ')}`).join('; ')}. Clarify the intended meaning; these results do not resolve it.`, 'callout'));
+                results.append(node('div', matched.length ? `Snapshot search · ${matched.length} matching records; showing ${Math.min(10, matched.length)}. Excerpts are not a verified answer. Check the exact source version.` : 'No supporting passages found. This does not establish that the answer is false or absent from other sources.', 'callout'));
+                if (matched.length)
+                    results.append(node('p', `Retrieval: ${ranking.intent}${ranking.anchors.length ? ` · anchors: ${ranking.anchors.filter(a => a.kind !== 'phrase').slice(0, 5).map(a => a.value).join(', ')}` : ''}. Match signals are ranking reasons, not proof.`, 'muted'));
+                matched.slice(0, 10).forEach(hit => results.append(sourceCard(hit.record, question, hit.signals.length ? `Matched by: ${hit.signals.join(', ')}` : undefined)));
+                if (matched.length) {
+                    const selected = new Set(matched.slice(0, 2).map(hit => hit.record.id));
+                    const links = data.edges.filter(edge => edge.type !== 'same_source' && (selected.has(edge.source) || selected.has(edge.target))).slice(0, 8).map(edge => ({ source: edge.source, target: edge.target, source_entity: edge.provenance?.source_entity, target_entity: edge.provenance?.target_entity, kind: edge.provenance?.kind || edge.type, standing: edge.provenance?.standing || 'declared', sites: edge.provenance?.sites || [] }));
+                    appendContext(results, { links, freshness: 'snapshot only; original files not rechecked', gaps: ['Offline export cannot verify current source freshness.', ...(!links.length ? ['No typed source link was recorded for the top excerpts.'] : [])] });
+                }
+            }
+        }
+        catch (error) {
+            results.append(node('div', `${error instanceof Error ? error.message : String(error)} No answer was produced. You can still inspect the offline records in Explore.`, 'callout error'));
+        }
+        finally {
+            submit.disabled = false;
+            answerButton.disabled = false;
+        }
+    });
+})();
+</script>
+<script>/* Demo-only presentation layer. Atlas still performs the source search. */
+(() => {
+  'use strict';
+  const params = new URLSearchParams(location.search);
+  let lang = params.get('lang') === 'en' ? 'en' : 'he';
+  const corpus = document.getElementById('demo-ribbon')?.dataset.corpus;
+  const dictionary = {
+    'Skip to workspace':'דלג לסביבת העבודה', 'Home':'בית', 'Ask':'שאלות', 'Explore':'מפה', 'Sources':'מקורות', 'Changes':'שינויים',
+    'Knowledge with a trail.':'ידע עם עקבות.', 'Every record has a source.':'לכל רשומה יש מקור.',
+    'OFFLINE SNAPSHOT':'תמונת מצב לא מקוונת', 'SOURCE SNAPSHOT':'תמונת מקורות', 'SOURCE-BOUND':'קשור למקור',
+    'How to explore':'איך חוקרים', 'Switch to light theme':'מעבר לעיצוב בהיר', 'Switch to dark theme':'מעבר לעיצוב כהה',
+    'A MAP, WITH THE EVIDENCE ATTACHED':'מפה עם המקורות לצדה', 'Find the context.':'מצאו את ההקשר.', 'Follow the source.':'עקבו אחר המקור.',
+    'Explore your documentation and code as a connected workspace. Inspect what is known, see where it comes from, and notice what is missing.':'חקרו מסמכים וקוד כסביבת עבודה מקושרת. בדקו מה נמצא, מאיפה הגיע ומה עדיין חסר.',
+    'Explore the map →':'למפת המקורות ←', 'Find an answer':'חפשו תשובה', 'Start somewhere useful':'בחרו נקודת התחלה', 'Three ways into your knowledge':'שלוש דרכים להתחיל',
+    'See what connects':'ראו מה מקושר', 'Follow labeled relationships between records and inspect one neighborhood at a time.':'עקבו אחר קשרים מסומנים בין רשומות ובדקו שכונה אחת בכל פעם.',
+    'Find source passages':'מצאו קטעי מקור', 'Search this snapshot with English or Hebrew terms and review the original evidence.':'חפשו בתמונת המצב בעברית או באנגלית ובדקו את המקור.',
+    'Notice what changed':'ראו מה השתנה', 'Review changed records before relying on an earlier answer or context packet.':'בדקו רשומות שהשתנו לפני הסתמכות על תשובה קודמת.',
+    'This workspace is a source snapshot. Inclusion and graph position do not establish that a claim is true. Verify the cited version before acting on it.':'זוהי תמונת מצב של מקורות. הכללה בה ומיקום במפה אינם מוכיחים שטענה נכונה. בדקו את הגרסה המצוטטת לפני פעולה.',
+    'KNOWLEDGE CONSTELLATION':'מפת ידע', 'Everything has a context.':'לכל דבר יש הקשר.', 'Save view':'שמרו תצוגה', 'Restore view':'שחזרו תצוגה',
+    'Use 2D view':'עברו לדו־ממד', 'Use 3D view':'עברו לתלת־ממד', '3D unavailable':'תלת־ממד אינו זמין', 'All domains':'כל התחומים',
+    'All kinds':'כל הסוגים', 'All relationships':'כל הקשרים', 'All sources':'כל המקורות', 'Clear':'נקו', 'Clear filters':'נקו מסננים',
+    'LIST VIEW':'תצוגת רשימה', '2D FALLBACK':'דו־ממד חלופי', '2D PLANAR MAP':'מפה דו־ממדית', '3D SPATIAL MAP':'מפה תלת־ממדית',
+    'Far':'רחוק', 'Near':'קרוב', '· layout depth':'· עומק לצורכי תצוגה', 'Zoom in':'הגדילו', 'Zoom out':'הקטינו',
+    'Rotate map left':'סובבו שמאלה', 'Rotate map right':'סובבו ימינה', 'Reset view':'אפסו תצוגה', 'Focus selected':'מקדו נבחר',
+    'Drag to orbit · Shift-drag to pan':'גררו לסיבוב · Shift וגרירה להזזה', 'Drag to pan · Scroll to zoom':'גררו להזזה · גללו להגדלה',
+    'Positions and depth are layout only':'מיקום ועומק הם לצורכי תצוגה בלבד', 'Records':'רשומות', '← Back':'חזרה', 'Forward →':'קדימה',
+    'EVIDENCE PANEL':'לוח מקורות', 'Choose a point of interest.':'בחרו נקודת עניין.',
+    'Select a map node or a record from the list. Its source, content, and typed relationships appear here.':'בחרו נקודה במפה או רשומה ברשימה. המקור, התוכן והקשרים שלה יופיעו כאן.',
+    'Compare records':'השוו רשומות', 'Clear comparison':'נקו השוואה', 'START WITH A QUESTION':'מתחילים בשאלה',
+    'Ask. Inspect. Understand.':'שאלו. בדקו. הבינו.',
+    'Search passages in this snapshot. Results are excerpts to verify, not a generated or verified answer.':'חפשו קטעים בתמונת המצב הזאת. התוצאות הן קטעים לבדיקה, לא תשובה שנוצרה או אומתה.',
+    'What do you want to understand?':'מה תרצו להבין?', 'Find supporting sources →':'מצאו מקורות תומכים ←', 'Show cited response':'הציגו קטעים מצוטטים',
+    'THE GROUND UNDER THE MAP':'המקורות שמתחת למפה', 'Inspect your sources.':'בדקו את המקורות.',
+    'This export records source identities and digests. It cannot check for changes after export.':'הייצוא שומר זהויות ומזהי תוכן של מקורות. הוא אינו יכול לבדוק שינויים לאחר הייצוא.',
+    'KNOWLEDGE HAS A HISTORY':'לידע יש היסטוריה', 'See what moved.':'ראו מה השתנה.',
+    'Changes compare this snapshot with its supplied predecessor. Review affected sources before reusing an older answer.':'השינויים משווים את תמונת המצב לקודמתה. בדקו מקורות שהושפעו לפני שימוש חוזר בתשובה ישנה.',
+    'Print source summary':'הדפיסו סיכום מקורות', 'Copy context':'העתיקו הקשר', 'Compare':'השוו', 'Remove comparison':'הסירו מהשוואה',
+    'Show in full map':'הציגו במפה מלאה', 'Source citation':'ציטוט מקור', 'Source content':'תוכן המקור',
+    'Show neighborhood':'הציגו שכנים', 'Expand depth':'הרחיבו עומק', 'Show all':'הציגו הכול', 'Inspect record':'בדקו רשומה',
+    'Inspect evidence':'בדקו מקור', 'Copy with citation':'העתיקו עם ציטוט', 'Explore these records':'חקרו רשומות אלה',
+    'No source links were recorded. This does not prove that none exist.':'לא נרשמו קשרי מקור. אין בכך הוכחה שלא קיימים כאלה.',
+    'No matching records. Try a different term or clear the filters.':'לא נמצאו רשומות תואמות. נסו מונח אחר או נקו את המסננים.',
+    'No supporting passages found. This does not establish that the answer is false or absent from other sources.':'לא נמצאו קטעים תומכים במקורות שנבחרו. אין בכך הוכחה שהתשובה שגויה או שאינה מופיעה במקורות אחרים.',
+    'Offline export cannot verify current source freshness.':'ייצוא לא מקוון אינו יכול לבדוק את עדכניות המקורות כעת.',
+    'No typed source link was recorded for the top excerpts.':'לא נרשם קשר מקור מסווג עבור הקטעים המובילים.',
+    'snapshot only; original files not rechecked':'תמונת מצב בלבד; הקבצים המקוריים לא נבדקו שוב',
+    'No source passages were returned. Do not treat this as a supported answer.':'לא הוחזרו קטעי מקור. אין להתייחס לכך כתשובה נתמכת.',
+    'No text content in this record.':'אין תוכן טקסטואלי ברשומה הזאת.',
+    'This record is outside the current map filters.':'הרשומה מחוץ למסנני המפה הנוכחיים.',
+    'Snapshot identity · verify against the original':'זהות תמונת מצב · יש להשוות למקור',
+    'Choose Compare on another record to inspect them side by side. Similar text does not establish equivalence.':'בחרו השוואה ברשומה נוספת כדי לבדוק אותן זו לצד זו. טקסט דומה אינו מוכיח שקילות.',
+    'This snapshot contains no source inventory.':'אין בתמונת המצב הזאת רשימת מקורות.',
+    'No entries reported for this comparison.':'לא דווחו רשומות בהשוואה הזאת.',
+    'View saved in this browser for this snapshot.':'התצוגה נשמרה בדפדפן עבור תמונת המצב הזאת.',
+    'Saved view restored.':'התצוגה השמורה שוחזרה.',
+    'records to explore':'רשומות לחקירה', 'typed relationships':'קשרים מסווגים', 'source snapshots':'תמונות מצב של מקורות'
+  };
+  const exact = text => dictionary[text] || text;
+  function translate(text) {
+    const lead = text.match(/^\s*/)[0], tail = text.match(/\s*$/)[0], core = text.trim();
+    if (!core) return text;
+    if (dictionary[core]) return lead + dictionary[core] + tail;
+    let match;
+    if ((match = /^Snapshot search · (\d+) matching records; showing (\d+). Excerpts are not a verified answer. Check the exact source version\.$/.exec(core))) return lead + `חיפוש בתמונת מצב · ${match[1]} רשומות תואמות; מוצגות ${match[2]}. הקטעים אינם תשובה מאומתת. בדקו את גרסת המקור.` + tail;
+    if ((match = /^Matched by: (.+)$/.exec(core))) return lead + `הותאם לפי: ${match[1]}` + tail;
+    if ((match = /^Retrieval: (.+)$/.exec(core))) return lead + `סיבת איתור: ${match[1].replace('Match signals are ranking reasons, not proof.','סימני התאמה הם סיבות לדירוג, לא הוכחה.')}` + tail;
+    if ((match = /^Context and open gaps · (\d+) source links$/.exec(core))) return lead + `הקשר ופערים פתוחים · ${match[1]} קשרי מקור` + tail;
+    if ((match = /^Source links · (\d+)$/.exec(core))) return lead + `קשרי מקור · ${match[1]}` + tail;
+    if ((match = /^(\d+) records · captured in this snapshot$/.exec(core))) return lead + `${match[1]} רשומות · נשמרו בתמונת המצב` + tail;
+    if ((match = /^(\d+) matching \/ (\d+) total$/.exec(core))) return lead + `${match[1]} תואמות / ${match[2]} בסך הכול` + tail;
+    if ((match = /^Show 100 more \((\d+) of (\d+) listed\)$/.exec(core))) return lead + `הציגו עוד 100 (${match[1]} מתוך ${match[2]})` + tail;
+    if ((match = /^(\d+\/\d+) nodes · (\d+\/\d+) edges$/.exec(core))) return lead + `${match[1]} נקודות · ${match[2]} קשרים` + tail;
+    if ((match = /^SNAPSHOT (.+)$/.exec(core))) return lead + `תמונת מצב ${match[1]}` + tail;
+    if ((match = /^Source ID: (.+)$/.exec(core))) return lead + `מזהה מקור: ${match[1]}` + tail;
+    if ((match = /^Digest: (.+)$/.exec(core))) return lead + `מזהה תוכן: ${match[1]}` + tail;
+    if ((match = /^Gap: (.+)$/.exec(core))) return lead + `פער: ${exact(match[1])}` + tail;
+    if ((match = /^Freshness: (.+)$/.exec(core))) return lead + `עדכניות: ${exact(match[1])}` + tail;
+    return text;
+  }
+  const originals = new Map();
+  const protectedText = parent => parent.closest('.record-body,.record-title,.record-name,.record-id,.source-path,.digest,.record-item,.map-node-label,.edge-button,.compare-card,.static-summary,#source-list h3,#changes-list button,.answer-card h3,.answer-card p:not(.muted),.source-card pre,#demo-first-result,#demo-more-sources,#demo-search-status,#workspace-title,#customer-name,.workspace-footer span:first-child');
+  function scan(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let text;
+    while ((text = walker.nextNode())) {
+      const parent = text.parentElement;
+      if (!parent || protectedText(parent) || parent.closest('script,style,textarea')) continue;
+      if (!originals.has(text)) originals.set(text, text.textContent);
+      text.textContent = lang === 'he' ? translate(originals.get(text)) : originals.get(text);
+    }
+    for (const element of root.querySelectorAll?.('[placeholder],[aria-label]') || []) {
+      for (const attr of ['placeholder','aria-label']) {
+        const current = element.getAttribute(attr);
+        if (!current) continue;
+        const key = `original-${attr}`;
+        if (!element.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]) element.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())] = current;
+        const original = element.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())];
+        element.setAttribute(attr, lang === 'he' ? translate(original) : original);
+      }
+    }
+  }
+  const results = document.getElementById('ask-results');
+  document.getElementById('ask-form').addEventListener('submit', () => { results.dataset.demoCompacted = ''; }, true);
+  function compactResults() {
+    if (results.dataset.demoCompacted === 'yes') return;
+    const cards = [...results.querySelectorAll('.answer-card')];
+    if (cards.length < 2) return;
+    results.dataset.demoCompacted = 'yes';
+    const status = results.querySelector('.callout');
+    if (status) {
+      const found = /Snapshot search · (\d+) matching records/.exec(status.textContent || '');
+      status.id = 'demo-search-status';
+      status.dataset.found = found?.[1] || String(cards.length);
+      status.dataset.available = String(cards.length - 1);
+      status.textContent = lang === 'he'
+        ? `חיפוש בתמונת מצב · נמצאו ${status.dataset.found} רשומות. מוצג קטע אחד; עוד ${status.dataset.available} קטעים זמינים כאן. אלה אינם תשובה מאומתת.`
+        : `Snapshot search · ${status.dataset.found} records matched. One excerpt is visible; ${status.dataset.available} more are available here. These are not a verified answer.`;
+    }
+    const first = cards[0];
+    const heading = document.createElement('p');
+    heading.className = 'callout';
+    heading.id = 'demo-first-result';
+    heading.textContent = lang === 'he'
+      ? 'הקטע הרלוונטי ביותר שנמצא · בדקו את המקור. זו אינה תשובה מאומתת.'
+      : 'Most relevant passage found · inspect the source. This is not a verified answer.';
+    results.insertBefore(heading, first);
+    for (const card of cards.slice(1)) card.hidden = true;
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.id = 'demo-more-sources';
+    more.className = 'quiet';
+    more.textContent = lang === 'he' ? `הציגו עוד ${cards.length - 1} קטעים` : `Show ${cards.length - 1} more passages`;
+    more.addEventListener('click', () => {
+      const willShow = cards[1].hidden;
+      for (const card of cards.slice(1)) card.hidden = !willShow;
+      more.textContent = lang === 'he'
+        ? (willShow ? 'הסתירו קטעים נוספים' : `הציגו עוד ${cards.length - 1} קטעים`)
+        : (willShow ? 'Hide additional passages' : `Show ${cards.length - 1} more passages`);
+    });
+    first.after(more);
+  }
+  dictionary['Find a concept, function, or phrase…'] = 'חפשו מושג, פעולה או ביטוי…';
+  dictionary['Find how source changes are tracked…'] = 'כיצד עוקבים אחר שינויים במקורות…';
+  dictionary['Spatial knowledge map. Use the record list below for keyboard access.'] = 'מפת ידע מרחבית. השתמשו ברשומה שמתחתיה לגישה מהמקלדת.';
+  dictionary['Two-dimensional knowledge map. Use the record list below for keyboard access.'] = 'מפת ידע דו־ממדית. השתמשו ברשומה שמתחתיה לגישה מהמקלדת.';
+  function choose(next) {
+    lang = next;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+    document.body.dataset.demoLang = lang;
+    document.getElementById('demo-he').setAttribute('aria-pressed', String(lang === 'he'));
+    document.getElementById('demo-en').setAttribute('aria-pressed', String(lang === 'en'));
+    document.getElementById('demo-back').textContent = lang === 'he' ? '← חזרה להדגמה' : '← Back to demo';
+    document.getElementById('demo-back').href = `index.html?lang=${lang}`;
+    const label = document.getElementById('demo-corpus-label');
+    label.textContent = corpus === 'support' ? (lang === 'he' ? 'נהלים בדיוניים בלבד' : 'Fictional procedures only') : (lang === 'he' ? 'מסמכי המוצר · לא אימות עצמאי' : 'Product documents · not independent verification');
+    label.classList.toggle('fiction', corpus === 'support');
+    document.getElementById('workspace-title').textContent = corpus === 'support'
+      ? (lang === 'he' ? 'Evidence Workspace · מוקד תמיכה בדיוני' : 'Evidence Workspace · Fictional support desk')
+      : (lang === 'he' ? 'Evidence Workspace · על המוצר' : 'Evidence Workspace · About the product');
+    document.getElementById('customer-name').textContent = lang === 'he' ? 'הדגמה ציבורית' : 'PUBLIC DEMO';
+    document.querySelector('.workspace-footer span').textContent = lang === 'he' ? 'EVIDENCE WORKSPACE / הדגמה ציבורית' : 'EVIDENCE WORKSPACE / PUBLIC DEMO';
+    params.set('lang', lang);
+    history.replaceState(null, '', `${location.pathname}?${params}${location.hash}`);
+    scan(document.querySelector('.app-shell'));
+    const status = document.getElementById('demo-search-status');
+    if (status) status.textContent = lang === 'he'
+      ? `חיפוש בתמונת מצב · נמצאו ${status.dataset.found} רשומות. מוצג קטע אחד; עוד ${status.dataset.available} קטעים זמינים כאן. אלה אינם תשובה מאומתת.`
+      : `Snapshot search · ${status.dataset.found} records matched. One excerpt is visible; ${status.dataset.available} more are available here. These are not a verified answer.`;
+    const first = document.getElementById('demo-first-result');
+    if (first) first.textContent = lang === 'he' ? 'הקטע הרלוונטי ביותר שנמצא · בדקו את המקור. זו אינה תשובה מאומתת.' : 'Most relevant passage found · inspect the source. This is not a verified answer.';
+    const more = document.getElementById('demo-more-sources');
+    if (more) {
+      const count = results.querySelectorAll('.answer-card').length - 1;
+      const visible = [...results.querySelectorAll('.answer-card')].slice(1).some(card => !card.hidden);
+      more.textContent = lang === 'he' ? (visible ? 'הסתירו קטעים נוספים' : `הציגו עוד ${count} קטעים`) : (visible ? 'Hide additional passages' : `Show ${count} more passages`);
+    }
+  }
+  document.getElementById('demo-he').addEventListener('click', () => choose('he'));
+  document.getElementById('demo-en').addEventListener('click', () => choose('en'));
+  const app = document.querySelector('.app-shell');
+  const observer = new MutationObserver(() => { scan(app); compactResults(); });
+  observer.observe(app, {childList:true, subtree:true});
+  choose(lang);
+  const view = params.get('view');
+  if (['home','ask','explore','sources','changes'].includes(view)) document.querySelector(`[data-view="${view}"]`)?.click();
+  const question = params.get('q');
+  if (question && question.length <= 500) {
+    document.querySelector('[data-view="ask"]')?.click();
+    document.getElementById('question').value = question;
+    document.getElementById('ask-submit').click();
+  }
+})();
+</script></body>
+</html>
